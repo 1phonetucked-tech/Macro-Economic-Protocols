@@ -202,7 +202,7 @@ body.home header.home-title h1 {
     font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
     font-size: 28px;
     font-weight: bold;
-    color: #808080;
+    color: #ffffff;
     text-shadow: none;
     pointer-events: auto;
 }
@@ -340,7 +340,7 @@ body.gallery-graph header h1 {
     font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
     font-size: 28px;
     font-weight: bold;
-    color: #808080;
+    color: #ffffff;
     text-shadow: none;
 }
 body.gallery-graph header a.back {
