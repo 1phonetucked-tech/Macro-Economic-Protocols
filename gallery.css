@@ -1,0 +1,425 @@
+body {
+    font-family: "Roboto", sans-serif;
+    color: #730544;
+    font-size: 1em;
+    background-color: #ffffff;
+    font-weight: 700;
+    /* layout: stack vertically, footer top -> content -> title bottom */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+footer         { order: 1; }
+body > section { order: 2; }
+header { order: 3; margin-top: auto; }
+
+a,
+a:visited {
+    color: #808080;;
+    text-shadow: 1px 1px rgba(36, 168, 238, 0.166);
+    font-weight: bold;
+    text-decoration: none;
+}
+a:hover {
+    font-weight: normal;
+}
+
+header,
+section,
+footer {
+    margin: 20px;
+}
+
+header {
+    margin: 20px;
+    margin-top: auto;
+}
+
+h1 {
+    color: #000000;
+    text-align: left;
+    font-size: 3.5rem;
+    margin: 25px;
+    text-shadow: 4px 4px rgba(26, 99, 52, 1);
+}
+h1 img { display: none; }
+
+
+nav {
+    margin: 10px;
+    clear: both;
+}
+ul {
+    padding-left: 20px;
+}
+
+footer {
+    text-align: center;
+    padding-top: 20px;
+    clear: both;
+    font-size: 0.75em;
+}
+
+#wrapper {
+    margin: 40px auto;
+    max-width: 1200px;
+}
+
+/* Gallery Pages */
+#photos {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+#photos figure {
+    margin: 5px;
+    max-width: min-content;
+}
+#photos img {
+    /* Enable this for pixel art!! */
+    image-rendering: pixelated;
+    filter: drop-shadow(0px 0px 30px rgba(128, 128, 128, 0.4));
+}
+#photos span {
+    text-align: center;
+    display: block;
+}
+#photos figcaption {
+    padding: 10px 0px;
+}
+
+.page-links {
+    text-align: center;
+}
+.page-links ul {
+    padding: 0px 5px;
+    display: inline-block;
+}
+.page-links li {
+    list-style: none;
+    display: inline;
+    margin: 0px 5px;
+}
+.page-links li:after {
+    content: ",";
+}
+
+/* Mobile Styling */
+@media (max-width: 800px) {
+    #photos figure {
+        width: 95%;
+        max-width: unset;
+    }
+    #photos img {
+        width: 100%;
+    }
+}
+
+/* JavaScript viewer */
+#js-viewer {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    background-color: rgba(247, 247, 247, 0.343);
+    filter: drop-shadow(0px 0px 50px rgba(128, 128, 128, 1));
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+#js-viewer img {
+    max-width: 95%;
+    max-height: 80%;
+    height: auto;
+    width: auto;
+    border-radius: 10px;
+}
+#js-viewer span {
+    margin-top: 10px;
+}
+#js-viewer span button {
+    font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
+    font-size: 2em;
+    font-weight: bold;
+    line-height: 1;
+    padding: 0px 12px;
+    color: #000000;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+#js-viewer span button:hover {
+    text-decoration: underline;
+}
+.contact-sheet img {
+    width: 250px;
+    height: auto;
+    image-rendering: auto;
+}
+
+/* ===== Homepage chart ===== */
+body.home {
+    margin: 0;
+    overflow: hidden;
+}
+#chart {
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100svh; /* fit the visible area on mobile (accounts for browser bars) */
+    max-width: none;
+    background-color: transparent;
+}
+#chart svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    opacity: 0.55;
+    font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
+}
+
+/* Homepage title: crisp HTML overlay (not faded by the graph) */
+body.home header.home-title {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    padding: 16px 24px;
+    margin: 0;
+    pointer-events: none;
+}
+body.home header.home-title h1 {
+    margin: 0;
+    font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
+    font-size: 28px;
+    font-weight: bold;
+    color: #808080;
+    text-shadow: none;
+    pointer-events: auto;
+}
+#chart .grid line {
+    stroke: rgba(179, 18, 43, 0.30);
+    stroke-width: 0.6;
+}
+#chart .grid .vline {
+    stroke: rgba(179, 18, 43, 0.16);
+}
+#chart .axis {
+    stroke: #b3122b;
+    stroke-width: 1.5;
+}
+#chart .axis-label text {
+    font-size: 13px;
+    fill: #000000;
+}
+#chart .series line {
+    stroke-width: 2.5;
+}
+
+/* Clickable index points */
+#chart .link-point { cursor: pointer; }
+#chart .link-point circle {
+    stroke: #ffffff;
+    stroke-width: 1.5;
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+                filter 0.2s ease;
+}
+#chart .lp-navy circle { fill: #000000; }
+#chart .lp-cyan circle { fill: #b3122b; }
+#chart .lp-magenta circle { fill: #d4566a; }
+/* Nodes pop up on hover / click */
+#chart .link-point:hover circle,
+#chart .link-point:focus circle,
+#chart .link-point:active circle {
+    transform: translateY(-2px) scale(1.3);
+    filter: drop-shadow(0 0 3px #e23a52) drop-shadow(0 0 6px #e23a52);
+}
+#chart .link-point:active circle {
+    transform: scale(1.15);
+}
+#chart .link-label {
+    font-size: 15px;
+    font-weight: bold;
+    fill: #000000;
+    filter: drop-shadow(2px 2px 0 #b3122b);
+    pointer-events: none;
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+#chart .link-point:hover .link-label,
+#chart .link-point:focus .link-label {
+    transform: translateY(-3px) scale(1.06);
+}
+
+/* Legend box (HTML overlay carrying the publish/update dates) */
+body.home .home-legend {
+    position: fixed;
+    top: 13%;
+    left: 5%;
+    z-index: 3;
+    display: flex;
+    gap: 18px;
+    border: 1px solid #b3122b;
+    padding: 6px 12px;
+    background: rgba(255, 255, 255, 0.65);
+    font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
+    font-size: 12px;
+    color: #333333;
+    white-space: nowrap;
+}
+
+/* Smaller screens: shrink the chart text + stack the legend */
+@media (max-width: 800px) {
+    #chart .axis-label text { font-size: 11px; }
+    #chart .link-label { font-size: 13px; }
+    body.home .home-legend {
+        flex-direction: column;
+        gap: 2px;
+        top: 12%;
+    }
+    body.home header.home-title h1 { font-size: 22px; }
+    body.gallery-graph header h1 { font-size: 20px; }
+    /* longer titles (e.g. Protocol Accessories) shrink to stay on one line like Benchmark */
+    body.gallery-graph header h1.compact { font-size: 16px; }
+}
+
+/* ===== Gallery pages: photos travel up a graph ===== */
+body.gallery-graph {
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-color: #ffffff;
+    font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
+}
+
+/* faded red grid + connecting line behind the photos */
+.graph-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100svh;
+    opacity: 0.55;
+    pointer-events: none;
+    z-index: 0;
+}
+.graph-bg .grid line { stroke: rgba(179, 18, 43, 0.30); stroke-width: 0.6; }
+.graph-bg .grid .vline { stroke: rgba(179, 18, 43, 0.16); }
+.graph-bg .axis { stroke: #b3122b; stroke-width: 1.5; }
+.graph-bg .series line { stroke: #b3122b; stroke-width: 2.5; }
+
+/* header: back link + title */
+body.gallery-graph header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    margin: 0;
+    pointer-events: none;
+}
+body.gallery-graph header a,
+body.gallery-graph header h1 { pointer-events: auto; }
+body.gallery-graph header h1 {
+    margin: 0;
+    font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
+    font-size: 28px;
+    font-weight: bold;
+    color: #808080;
+    text-shadow: none;
+}
+body.gallery-graph header a.back {
+    color: #000000;
+    font-weight: bold;
+    text-decoration: none;
+    text-shadow: none;
+    white-space: nowrap;
+}
+body.gallery-graph header a.back:hover { text-decoration: underline; }
+
+/* photos as data points along the line */
+body.gallery-graph #photos {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100svh;
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    z-index: 1;
+}
+body.gallery-graph #photos figure {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    width: 8vw;
+    max-width: 120px;
+    min-width: 60px;
+    text-align: center;
+}
+body.gallery-graph #photos figure a { display: block; }
+body.gallery-graph #photos figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    image-rendering: auto;
+    border: 1px solid #b3122b;
+    background: #ffffff;
+    cursor: pointer;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.2s ease;
+}
+body.gallery-graph #photos figure:hover { z-index: 5; }
+body.gallery-graph #photos figure:hover img {
+    transform: scale(1.6) translateY(-4px);
+    box-shadow: 0 0 12px rgba(179, 18, 43, 0.6);
+}
+/* filename caption appears on hover only */
+body.gallery-graph #photos .photo-filename {
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: calc(100% + 4px);
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font-size: 11px;
+    color: #000000;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 1px 4px;
+}
+body.gallery-graph #photos figure:hover .photo-filename { display: block; }
+
+/* footer: published / updated */
+body.gallery-graph footer {
+    position: fixed;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    margin: 0;
+    border: 1px solid #b3122b;
+    padding: 5px 12px;
+    background: rgba(255, 255, 255, 0.65);
+    text-align: center;
+    font-size: 11px;
+    color: #333333;
+    white-space: nowrap;
+}
