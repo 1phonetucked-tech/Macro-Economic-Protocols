@@ -188,6 +188,7 @@
   }
   body.commission button.submit:hover { background: #000000; }
   body.commission button.submit:disabled { opacity: 0.6; cursor: default; }
+  body.commission .submit-row { text-align: right; margin-top: 8px; }
 
   body.commission .inv-foot {
     display: flex; justify-content: space-between; align-items: flex-end; gap: 16px;
@@ -286,7 +287,9 @@
         </div>
       </div>
 
-      <button class="submit" type="submit">Submit Request</button>
+      <div class="submit-row">
+        <button class="submit" type="submit">Submit Request</button>
+      </div>
 
       <div class="inv-foot">
         <div class="note">Please reference Form No. <span id="form-no-foot">PT-—</span> when corresponding.</div>
