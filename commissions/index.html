@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link href="../gallery.css?v=38" rel="stylesheet" type="text/css" media="all">
+<link href="../gallery.css?v=39" rel="stylesheet" type="text/css" media="all">
 <style>
   body.commission {
     margin: 0;
@@ -65,7 +65,7 @@
     margin: 0 0 6px;
     font-size: 26px;
     letter-spacing: 1px;
-    color: #b3122b;
+    color: #1a1a1a;
     text-shadow: none;
     text-align: left;
   }
@@ -95,8 +95,8 @@
   /* madlib line */
   body.commission .madlib { font-size: 16px; line-height: 1.9; color: #1a1a1a; margin: 0 0 26px; }
   body.commission .madlib select {
-    font-family: inherit; font-size: 16px; font-weight: 700; color: #b3122b;
-    background: transparent; border: none; border-bottom: 2px solid #b3122b;
+    font-family: inherit; font-size: 16px; font-weight: 700; color: #1a1a1a;
+    background: transparent; border: none; border-bottom: 2px solid #1a1a1a;
     padding: 2px 4px; cursor: pointer;
   }
   body.commission .madlib select:focus { outline: none; }
@@ -110,7 +110,7 @@
     color: #1a1a1a;
     margin-bottom: 8px;
   }
-  body.commission .req { color: #b3122b; }
+  body.commission .req { color: #1a1a1a; }
 
   /* shared input look: typed value on a ruled line */
   body.commission input[type="text"],
@@ -133,7 +133,7 @@
     padding: 8px;
   }
   body.commission input:focus, body.commission textarea:focus, body.commission select:focus {
-    outline: none; border-color: #b3122b;
+    outline: none; border-color: #1a1a1a;
   }
 
   /* REQUEST FROM block */
@@ -178,10 +178,10 @@
   /* submit + footer */
   body.commission button.submit {
     font-family: inherit; font-size: 14px; font-weight: 700; letter-spacing: 1px;
-    text-transform: uppercase; color: #ffffff; background: #b3122b;
+    text-transform: uppercase; color: #ffffff; background: #1a1a1a;
     border: none; padding: 12px 28px; cursor: pointer;
   }
-  body.commission button.submit:hover { background: #8c0e21; }
+  body.commission button.submit:hover { background: #000000; }
   body.commission button.submit:disabled { opacity: 0.6; cursor: default; }
 
   body.commission .inv-foot {
@@ -189,12 +189,12 @@
     margin-top: 26px; padding-top: 12px; border-top: 1px solid #ccc;
     font-size: 11px;
   }
-  body.commission .inv-foot .note { color: #b3122b; max-width: 60%; }
-  body.commission .inv-foot .thanks { color: #b3122b; font-weight: 700; white-space: nowrap; }
+  body.commission .inv-foot .note { color: #1a1a1a; max-width: 60%; }
+  body.commission .inv-foot .thanks { color: #1a1a1a; font-weight: 700; white-space: nowrap; }
 
   /* confirmation state */
   body.commission .confirm { display: none; font-size: 14px; line-height: 1.7; color: #1a1a1a; }
-  body.commission .confirm b { color: #b3122b; }
+  body.commission .confirm b { color: #1a1a1a; }
   body.commission.sent form { display: none; }
   body.commission.sent .confirm { display: block; }
 
@@ -241,7 +241,6 @@
         </select> request.</p>
 
       <div class="inv-block">
-        <div class="blk-label">Request From</div>
         <div class="pair">
           <div>
             <div class="mini">Name <span class="req">*</span></div>
@@ -286,14 +285,13 @@
 
       <div class="inv-foot">
         <div class="note">Please reference Form No. <span id="form-no-foot">PT-—</span> when corresponding.</div>
-        <div class="thanks">Thank you &#8594;</div>
       </div>
     </form>
 
     <div class="confirm">
       <p>Request <b id="confirm-no">PT-—</b> received.</p>
       <p>A reply is en route to your email. Reference this number when corresponding.</p>
-      <p><a class="back" style="color:#b3122b" href="../index.html">&#8592; back to index</a></p>
+      <p><a class="back" style="color:#1a1a1a" href="../index.html">&#8592; back to index</a></p>
     </div>
   </main>
 
