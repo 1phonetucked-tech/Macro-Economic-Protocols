@@ -222,7 +222,7 @@ body.home header.home-title h1 {
     fill: #ffffff;
 }
 #chart .series line {
-    stroke-width: 2.5;
+    stroke-width: 1.5;
 }
 
 /* Clickable index points */
@@ -319,7 +319,7 @@ body.gallery-graph {
 .graph-bg .grid line { stroke: rgba(255, 255, 255, 0.30); stroke-width: 0.6; }
 .graph-bg .grid .vline { stroke: rgba(255, 255, 255, 0.16); }
 .graph-bg .axis { stroke: #b3122b; stroke-width: 1.5; }
-.graph-bg .series line { stroke: #ffffff; stroke-width: 2.5; }
+.graph-bg .series line { stroke: #ffffff; stroke-width: 1.5; }
 
 /* header: back link + title */
 body.gallery-graph header {
