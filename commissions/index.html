@@ -59,6 +59,12 @@
     gap: 24px;
     margin-bottom: 30px;
   }
+  body.commission .inv-logo {
+    display: block;
+    width: 96px;
+    height: auto;
+    margin-bottom: 14px;
+  }
   body.commission .inv-issuer h1 {
     margin: 0 0 6px;
     font-size: 21px;
@@ -184,9 +190,9 @@
     padding-bottom: 5px;
     border-bottom: 1px solid #1a1a1a;
   }
-  body.commission .inv-colhead .c-qty { width: 52px; flex: none; }
+  body.commission .inv-colhead .c-qty { width: 64px; flex: none; }
   body.commission .inv-line { display: flex; padding-top: 12px; }
-  body.commission .inv-line .c-qty { width: 52px; flex: none; font-size: 12px; color: #555; padding-top: 6px; }
+  body.commission .inv-line .c-qty { width: 64px; flex: none; font-size: 12px; color: #555; padding-top: 6px; }
   body.commission .inv-line .c-desc { flex: 1; }
   body.commission .inv-line .ref-row { display: flex; align-items: baseline; gap: 8px; margin-top: 10px; }
   body.commission .inv-line .ref-row .ref-tag { font-size: 10px; letter-spacing: 1px; color: #777; white-space: nowrap; }
@@ -249,6 +255,7 @@
   <main class="paper">
     <div class="inv-head">
       <div class="inv-issuer">
+        <img class="inv-logo" src="../logo.png" alt="phonetucked">
         <h1>Request Protocol</h1>
         <div class="sub">phonetucked.dev<br>commission intake</div>
       </div>
@@ -276,11 +283,11 @@
       <div class="inv-block">
         <div class="pair">
           <div>
-            <div class="mini">Name <span class="req">*</span></div>
+            <div class="mini">[ Name ] <span class="req">*</span></div>
             <input type="text" name="name" required>
           </div>
           <div>
-            <div class="mini">Email <span class="req">*</span></div>
+            <div class="mini">[ Email ] <span class="req">*</span></div>
             <input type="email" name="email" required>
           </div>
         </div>
@@ -288,8 +295,8 @@
 
       <div class="inv-table">
         <div class="inv-colhead">
-          <span class="c-qty">QTY</span>
-          <span class="c-desc">Description &amp; Details <span class="req">*</span></span>
+          <span class="c-qty">[ QTY ]</span>
+          <span class="c-desc">[ Description &amp; Details ] <span class="req">*</span></span>
         </div>
         <div class="inv-line">
           <span class="c-qty">01</span>
@@ -305,7 +312,7 @@
             </div>
             <input type="hidden" name="description" id="description-field">
             <div class="ref-row">
-              <span class="ref-tag">REF:</span>
+              <span class="ref-tag">[ REF ]</span>
               <input type="text" name="references">
             </div>
           </div>
@@ -314,11 +321,11 @@
 
       <div class="inv-totals">
         <div class="t-row">
-          <span class="t-label">Budget</span>
+          <span class="t-label">[ Budget ]</span>
           <span class="t-val"><input type="text" name="budget"></span>
         </div>
         <div class="t-row">
-          <span class="t-label">Deadline / Timeline</span>
+          <span class="t-label">[ Deadline / Timeline ]</span>
           <span class="t-val"><input type="text" name="deadline"></span>
         </div>
       </div>
