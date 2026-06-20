@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Request Protocol — style samples</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  :root { --cyan: #29c2ec; --cyan-dk: #1597bb; --ink: #1a1a1a; }
+  body {
+    margin: 0; background: #000; color: #fff;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding: 28px 18px 80px;
+  }
+  .intro { max-width: 980px; margin: 0 auto 26px; }
+  .intro h1 { font-size: 18px; margin: 0 0 6px; }
+  .intro p { font-size: 12px; color: #aaa; margin: 0; line-height: 1.6; }
+  .grid { max-width: 980px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } }
+
+  .cap { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: #fff; margin: 0 0 8px; }
+  .cap b { color: var(--cyan); }
+  .note { font-size: 10px; color: #888; margin: 8px 2px 0; line-height: 1.5; }
+
+  /* base mini-sheet (matches the real form: white, helvetica labels, mono values, lowercase, brackets) */
+  .sheet {
+    position: relative; background: #fff; color: var(--ink);
+    padding: 22px 24px; box-sizing: border-box; font-size: 11px; text-transform: lowercase;
+  }
+  .sheet .hd { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+  .sheet .ttl { font-size: 17px; letter-spacing: 1px; }
+  .sheet .meta { border: 1px solid var(--ink); padding: 4px 8px; font-size: 9px; min-width: 130px; }
+  .sheet .meta .r { display: flex; justify-content: space-between; gap: 14px; padding: 1px 0; }
+  .sheet .meta .r + .r { border-top: 1px dotted #bbb; }
+  .mono { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+  .lbl { font-size: 10px; letter-spacing: .5px; color: #777; margin: 0 0 3px; }
+  .req { color: var(--ink); }
+  .inp { border: none; border-bottom: 1px solid #999; padding: 6px 2px; margin-bottom: 12px; font-size: 12px; min-height: 14px; }
+  .box { border: 1px solid var(--ink); height: 70px; margin-top: 4px; }
+  .field { margin-bottom: 2px; }
+
+  /* ---- 1: CYAN FOCUS ACCENTS ---- */
+  .s-cyan .inp { transition: border-color .15s; }
+  .s-cyan .inp:focus { outline: none; border-color: var(--cyan); }
+  .s-cyan .focused .lbl { color: var(--cyan-dk); }
+  .s-cyan .focused .inp { border-bottom: 2px solid var(--cyan); }
+  .s-cyan .req { color: var(--cyan-dk); }
+
+  /* ---- 2: NUMBERED SECTIONS ---- */
+  .sec { font-size: 10px; letter-spacing: 1px; color: var(--ink); margin: 14px 0 8px; font-weight: 700; }
+  .sec span { color: #999; margin-right: 6px; }
+  .s-num .sec:first-child { margin-top: 0; }
+
+  /* ---- 3: GRAPH-PAPER BACKDROP ---- */
+  .s-grid {
+    background-color: #fff;
+    background-image:
+      linear-gradient(rgba(20,140,180,.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(20,140,180,.07) 1px, transparent 1px);
+    background-size: 16px 16px;
+  }
+
+  /* ---- 4: CORNER MARKS + RULES ---- */
+  .s-marks::before, .s-marks::after,
+  .s-marks .c-bl::before, .s-marks .c-bl::after { content: ""; position: absolute; width: 12px; height: 12px; }
+  .s-marks::before { top: 7px; left: 7px; border-top: 1.5px solid var(--ink); border-left: 1.5px solid var(--ink); }
+  .s-marks::after  { top: 7px; right: 7px; border-top: 1.5px solid var(--ink); border-right: 1.5px solid var(--ink); }
+  .s-marks .c-bl::before { bottom: 7px; left: 7px; border-bottom: 1.5px solid var(--ink); border-left: 1.5px solid var(--ink); }
+  .s-marks .c-bl::after  { bottom: 7px; right: 7px; border-bottom: 1.5px solid var(--ink); border-right: 1.5px solid var(--ink); }
+  .s-marks .rule { height: 0; border-top: 1px solid var(--ink); margin: 10px 0 12px; }
+  .s-marks .rule.thin { border-top: 1px solid #ddd; }
+</style>
+</head>
+<body>
+  <div class="intro">
+    <h1>request protocol — style samples</h1>
+    <p>Each card is a mini version of your form with ONE enhancement applied. Same DNA (white sheet, helvetica labels, mono values, lowercase, bracket labels). Click into the fields on card 1 to see the cyan focus live. Tell me which to add to the real form (mix & match welcome).</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- 1. CYAN FOCUS -->
+    <div>
+      <div class="cap">01 · <b>cyan focus accents</b></div>
+      <div class="sheet s-cyan">
+        <div class="hd">
+          <div class="ttl">request protocol</div>
+          <div class="meta mono"><div class="r"><span>form no.</span><span>pt-001</span></div><div class="r"><span>date</span><span>2026-06-20</span></div></div>
+        </div>
+        <div class="field focused"><div class="lbl">[ name ] <span class="req">*</span></div><div class="inp mono">jane doe</div></div>
+        <div class="field"><div class="lbl">[ email ] <span class="req">*</span></div><input class="inp mono" style="display:block;width:100%;box-sizing:border-box" placeholder=""></div>
+      </div>
+      <div class="note">field 1 shown in the focused (cyan) state; click field 2 to try it live.</div>
+    </div>
+
+    <!-- 2. NUMBERED SECTIONS -->
+    <div>
+      <div class="cap">02 · <b>numbered sections</b></div>
+      <div class="sheet s-num">
+        <div class="sec"><span>01</span>contact</div>
+        <div class="field"><div class="lbl">[ name ] <span class="req">*</span></div><div class="inp mono">jane doe</div></div>
+        <div class="sec"><span>02</span>specification</div>
+        <div class="field"><div class="lbl">[ description &amp; details ] <span class="req">*</span></div><div class="box"></div></div>
+        <div class="sec"><span>03</span>terms</div>
+        <div class="field"><div class="lbl">[ budget ]</div><div class="inp mono">$2,000</div></div>
+      </div>
+      <div class="note">coded section headers, spec-sheet structure.</div>
+    </div>
+
+    <!-- 3. GRAPH PAPER -->
+    <div>
+      <div class="cap">03 · <b>graph-paper backdrop</b></div>
+      <div class="sheet s-grid">
+        <div class="hd">
+          <div class="ttl">request protocol</div>
+          <div class="meta mono" style="background:#fff"><div class="r"><span>form no.</span><span>pt-001</span></div><div class="r"><span>date</span><span>2026-06-20</span></div></div>
+        </div>
+        <div class="field"><div class="lbl">[ name ] <span class="req">*</span></div><div class="inp mono">jane doe</div></div>
+        <div class="field"><div class="lbl">[ description &amp; details ] <span class="req">*</span></div><div class="box" style="background:#fff"></div></div>
+      </div>
+      <div class="note">faint engineering grid behind the content (~7% blue).</div>
+    </div>
+
+    <!-- 4. CORNER MARKS + RULES -->
+    <div>
+      <div class="cap">04 · <b>corner marks + rules</b></div>
+      <div class="sheet s-marks">
+        <span class="c-bl"></span>
+        <div class="ttl">request protocol</div>
+        <div class="rule"></div>
+        <div class="sec" style="font-weight:700;letter-spacing:1px;color:#1a1a1a;font-size:10px;margin:0 0 8px">contact</div>
+        <div class="field"><div class="lbl">[ name ] <span class="req">*</span></div><div class="inp mono">jane doe</div></div>
+        <div class="rule thin"></div>
+        <div class="field"><div class="lbl">[ email ] <span class="req">*</span></div><div class="inp mono">jane@studio.cc</div></div>
+      </div>
+      <div class="note">drafting corner ticks + hairline section rules.</div>
+    </div>
+
+  </div>
+</body>
+</html>
