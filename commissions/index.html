@@ -172,6 +172,7 @@
   body.commission .rt { border: 1px solid #1a1a1a; }
   body.commission .rt-bar {
     display: flex;
+    position: relative;
     border-bottom: 1px solid #ddd;
   }
   body.commission .rt-bar button {
@@ -183,7 +184,26 @@
     cursor: pointer; padding: 0;
   }
   body.commission .rt-bar button:last-child { border-right: none; }
-  body.commission .rt-bar button:hover { background: #f0f0f0; color: #1a1a1a; }
+  body.commission .rt-bar button:hover { color: #1597bb; }
+  body.commission .rt-bar button.on { color: #1597bb; }
+
+  /* sliding cyan indicator (logo accent) */
+  body.commission .rt-slide {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 25%;
+    height: 2px;
+    background: #29c2ec;
+    transform: translateX(0);
+    opacity: 0;
+    transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.15s ease;
+    pointer-events: none;
+  }
+  body.commission .rt-bar:has(button:nth-of-type(1):hover) .rt-slide { transform: translateX(0%);   opacity: 1; }
+  body.commission .rt-bar:has(button:nth-of-type(2):hover) .rt-slide { transform: translateX(100%); opacity: 1; }
+  body.commission .rt-bar:has(button:nth-of-type(3):hover) .rt-slide { transform: translateX(200%); opacity: 1; }
+  body.commission .rt-bar:has(button:nth-of-type(4):hover) .rt-slide { transform: translateX(300%); opacity: 1; }
   body.commission .rt-bar button .hl { background: #fff14d; color: #1a1a1a; padding: 0 3px; }
   body.commission .rt-area {
     border: none;
@@ -340,6 +360,7 @@
                 <button type="button" data-cmd="italic" title="Italic"><i>italic</i></button>
                 <button type="button" data-cmd="underline" title="Underline"><u>underline</u></button>
                 <button type="button" data-cmd="hilite" title="Highlight"><span class="hl">highlight</span></button>
+                <span class="rt-slide" aria-hidden="true"></span>
               </div>
               <div class="rt-area" id="rt-area" contenteditable="true" role="textbox" aria-multiline="true"></div>
             </div>
@@ -422,7 +443,22 @@
       } else {
         document.execCommand(cmd, false, null);
       }
+      updateActive();
     });
+  });
+
+  function updateActive() {
+    ['bold', 'italic', 'underline'].forEach(function (cmd) {
+      var on = false;
+      try { on = document.queryCommandState(cmd); } catch (e) {}
+      var btn = document.querySelector('.rt-bar button[data-cmd="' + cmd + '"]');
+      if (btn) btn.classList.toggle('on', on);
+    });
+  }
+  rtArea.addEventListener('keyup', updateActive);
+  rtArea.addEventListener('mouseup', updateActive);
+  document.addEventListener('selectionchange', function () {
+    if (document.activeElement === rtArea) updateActive();
   });
 
   form.addEventListener('submit', async function (e) {
