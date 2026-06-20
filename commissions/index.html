@@ -59,6 +59,10 @@
     gap: 24px;
     margin-bottom: 30px;
   }
+  body.commission .inv-head-right {
+    width: 250px;
+    flex: none;
+  }
   body.commission .inv-logo {
     display: block;
     width: 150px;
@@ -173,9 +177,9 @@
   }
 
   /* REQUEST FROM block */
-  body.commission .inv-block { margin-bottom: 30px; }
-  body.commission .inv-block .pair { display: flex; gap: 28px; flex-wrap: wrap; }
-  body.commission .inv-block .pair > div { flex: 1; min-width: 200px; }
+  body.commission .inv-block { margin-top: 14px; }
+  body.commission .inv-block .pair { display: flex; flex-direction: column; gap: 12px; }
+  body.commission .inv-block .pair > div { width: 100%; }
   body.commission .inv-block .mini { font-size: 10px; letter-spacing: 0.5px; color: #777; text-transform: uppercase; margin-bottom: 3px; }
 
   /* line-item table */
@@ -234,12 +238,18 @@
   /* confirmation state */
   body.commission .confirm { display: none; font-size: 12px; line-height: 1.7; color: #1a1a1a; }
   body.commission .confirm b { color: #1a1a1a; }
-  body.commission.sent form { display: none; }
+  body.commission.sent .inv-block,
+  body.commission.sent .madlib,
+  body.commission.sent .inv-table,
+  body.commission.sent .inv-totals,
+  body.commission.sent .submit-row,
+  body.commission.sent .inv-foot { display: none; }
   body.commission.sent .confirm { display: block; }
 
   @media (max-width: 640px) {
     body.commission .paper { padding: 28px 22px 32px; }
     body.commission .inv-head { flex-direction: column; }
+    body.commission .inv-head-right { width: 100%; }
     body.commission .inv-meta { min-width: 0; width: 100%; box-sizing: border-box; }
     body.commission .inv-issuer h1 { font-size: 21px; }
     body.commission .inv-totals { width: 100%; }
@@ -253,23 +263,37 @@
   </div>
 
   <main class="paper">
-    <div class="inv-head">
-      <div class="inv-issuer">
-        <img class="inv-logo" src="../logo.png" alt="phonetucked">
-        <h1>Request Protocol</h1>
-        <div class="sub">phonetucked.dev<br>commission intake</div>
-      </div>
-      <div class="inv-meta">
-        <div class="m-row"><span class="m-label">FORM NO.</span><span class="m-val" id="form-no">PT-—</span></div>
-        <div class="m-row"><span class="m-label">DATE</span><span class="m-val" id="form-date">————</span></div>
-        <div class="m-row"><span class="m-label">PAGE</span><span class="m-val">1 OF 1</span></div>
-      </div>
-    </div>
-
     <form id="request-form" action="https://formspree.io/f/mdavqqkw" method="POST">
       <input type="hidden" name="_subject" value="New request — phonetucked">
       <input type="hidden" name="request_id" id="request-id" value="">
       <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <div class="inv-head">
+        <div class="inv-issuer">
+          <img class="inv-logo" src="../logo.png" alt="phonetucked">
+          <h1>Request Protocol</h1>
+          <div class="sub">phonetucked.dev<br>commission intake</div>
+        </div>
+        <div class="inv-head-right">
+          <div class="inv-meta">
+            <div class="m-row"><span class="m-label">FORM NO.</span><span class="m-val" id="form-no">PT-—</span></div>
+            <div class="m-row"><span class="m-label">DATE</span><span class="m-val" id="form-date">————</span></div>
+            <div class="m-row"><span class="m-label">PAGE</span><span class="m-val">1 OF 1</span></div>
+          </div>
+          <div class="inv-block">
+            <div class="pair">
+              <div>
+                <div class="mini">[ Name ] <span class="req">*</span></div>
+                <input type="text" name="name" required>
+              </div>
+              <div>
+                <div class="mini">[ Email ] <span class="req">*</span></div>
+                <input type="email" name="email" required>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <p class="madlib">Initialize a
         <select id="type" name="commission_type">
@@ -279,19 +303,6 @@
           <option value="Systems Engineering">Systems Engineering</option>
           <option value="General Inquiry">General Inquiry</option>
         </select> request.</p>
-
-      <div class="inv-block">
-        <div class="pair">
-          <div>
-            <div class="mini">[ Name ] <span class="req">*</span></div>
-            <input type="text" name="name" required>
-          </div>
-          <div>
-            <div class="mini">[ Email ] <span class="req">*</span></div>
-            <input type="email" name="email" required>
-          </div>
-        </div>
-      </div>
 
       <div class="inv-table">
         <div class="inv-colhead">
