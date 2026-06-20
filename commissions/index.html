@@ -163,12 +163,14 @@
     border-bottom: 1px solid #ddd;
   }
   body.commission .rt-bar button {
+    flex: 1;
     font-family: inherit; font-size: 11px; line-height: 1; letter-spacing: 0.3px;
     height: 26px;
     background: transparent; color: #1a1a1a;
     border: none; border-right: 1px solid #eee;
-    cursor: pointer; padding: 0 12px;
+    cursor: pointer; padding: 0;
   }
+  body.commission .rt-bar button:last-child { border-right: none; }
   body.commission .rt-bar button:hover { background: #1a1a1a; color: #ffffff; }
   body.commission .rt-bar button .hl { background: #fff14d; color: #1a1a1a; padding: 0 3px; }
   body.commission .rt-area {
