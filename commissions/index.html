@@ -149,6 +149,15 @@
     text-align: center;
   }
 
+  /* madlibs intro line with inline request-type select */
+  body.commission .madlib { font-size: 18px; line-height: 1.9; color: #1a1a1a; margin: 0 0 28px; }
+  body.commission .madlib select {
+    font-family: inherit; font-size: 18px; font-weight: 700; color: #b3122b;
+    background: transparent; border: none; border-bottom: 2px solid #b3122b;
+    padding: 2px 4px; cursor: pointer;
+  }
+  body.commission .madlib select:focus { outline: none; }
+
   @media (max-width: 560px) {
     body.commission .paper { padding: 28px 22px 32px; }
     body.commission .letterhead h1 { font-size: 21px; }
@@ -169,14 +178,18 @@
       </div>
     </div>
 
-    <p class="intro">
-      Fill out this form to submit a request. The more detail you provide,
-      the faster I can quote and schedule the work. Fields marked <span style="color:#b3122b">*</span> are required.
-    </p>
-
     <form action="https://formspree.io/f/mdavqqkw" method="POST">
       <input type="hidden" name="_subject" value="New request — phonetucked">
       <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <p class="madlib">Initialize a
+        <select id="type" name="commission_type">
+          <option value="Photography">Photography</option>
+          <option value="Print">Print</option>
+          <option value="Digital">Digital</option>
+          <option value="Accessory / Object">Accessory / Object</option>
+          <option value="Other">Other</option>
+        </select> request.</p>
 
       <div class="row">
         <div class="field">
@@ -187,17 +200,6 @@
           <label for="email">Email <span class="req">*</span></label>
           <input type="email" id="email" name="email" required>
         </div>
-      </div>
-
-      <div class="field">
-        <label for="type">Commission Type</label>
-        <select id="type" name="commission_type">
-          <option value="Photography">Photography</option>
-          <option value="Print">Print</option>
-          <option value="Digital">Digital</option>
-          <option value="Accessory / Object">Accessory / Object</option>
-          <option value="Other">Other</option>
-        </select>
       </div>
 
       <div class="field">
