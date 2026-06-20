@@ -183,11 +183,13 @@
   /* submit + footer */
   body.commission button.submit {
     font-family: inherit; font-size: 12px; font-weight: 700; letter-spacing: 1px;
-    text-transform: uppercase; color: #ffffff; background: #1a1a1a;
-    border: none; padding: 12px 28px; cursor: pointer;
+    text-transform: uppercase; color: #1a1a1a; background: transparent;
+    border: none; padding: 6px 2px; cursor: pointer;
   }
-  body.commission button.submit:hover { background: #000000; }
-  body.commission button.submit:disabled { opacity: 0.6; cursor: default; }
+  body.commission button.submit::before { content: "[ "; }
+  body.commission button.submit::after { content: " ]"; }
+  body.commission button.submit:hover { text-decoration: underline; }
+  body.commission button.submit:disabled { opacity: 0.5; cursor: default; text-decoration: none; }
   body.commission .submit-row { text-align: right; margin-top: 8px; }
 
   body.commission .inv-foot {
