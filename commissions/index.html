@@ -25,7 +25,7 @@
   /* top bar: back link */
   body.commission .topbar {
     width: 100%;
-    max-width: 760px;
+    max-width: 820px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -42,60 +42,80 @@
   /* the paper sheet */
   body.commission .paper {
     width: 100%;
-    max-width: 760px;
+    max-width: 820px;
     background: #ffffff;
     color: #1a1a1a;
     border: none;
     box-shadow: 0 0 40px rgba(255, 255, 255, 0.12);
-    padding: 40px 44px 48px;
+    padding: 44px 48px 40px;
     box-sizing: border-box;
+    font-size: 13px;
+    line-height: 1.5;
   }
 
-  /* letterhead */
-  body.commission .letterhead {
-    border-bottom: 1px solid #1a1a1a;
-    padding-bottom: 14px;
-    margin-bottom: 28px;
+  /* ===== invoice header: issuer left, meta grid right ===== */
+  body.commission .inv-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 30px;
   }
-  body.commission .letterhead h1 {
-    margin: 0;
+  body.commission .inv-issuer h1 {
+    margin: 0 0 6px;
     font-size: 26px;
     letter-spacing: 1px;
     color: #b3122b;
     text-shadow: none;
     text-align: left;
   }
-  body.commission .letterhead .sub {
-    margin-top: 6px;
-    font-size: 12px;
+  body.commission .inv-issuer .sub {
+    font-size: 11px;
+    line-height: 1.5;
     color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  body.commission .inv-meta {
+    border: 1px solid #1a1a1a;
+    padding: 6px 10px;
+    font-size: 11px;
+    min-width: 210px;
+  }
+  body.commission .inv-meta .m-row {
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 8px;
+    gap: 16px;
+    padding: 2px 0;
   }
-  body.commission .intro {
-    font-size: 13px;
-    line-height: 1.6;
-    color: #333;
-    margin-bottom: 28px;
-  }
+  body.commission .inv-meta .m-row + .m-row { border-top: 1px dotted #bbb; }
+  body.commission .inv-meta .m-label { color: #555; letter-spacing: 0.5px; }
+  body.commission .inv-meta .m-val { font-weight: 700; color: #1a1a1a; }
 
-  /* form fields */
-  body.commission .field { margin-bottom: 20px; }
-  body.commission .field label {
-    display: block;
-    font-size: 12px;
+  /* madlib line */
+  body.commission .madlib { font-size: 16px; line-height: 1.9; color: #1a1a1a; margin: 0 0 26px; }
+  body.commission .madlib select {
+    font-family: inherit; font-size: 16px; font-weight: 700; color: #b3122b;
+    background: transparent; border: none; border-bottom: 2px solid #b3122b;
+    padding: 2px 4px; cursor: pointer;
+  }
+  body.commission .madlib select:focus { outline: none; }
+
+  /* generic uppercase section label, like BILL TO */
+  body.commission .blk-label {
+    font-size: 11px;
     font-weight: 700;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
     text-transform: uppercase;
     color: #1a1a1a;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
   }
-  body.commission .field .req { color: #b3122b; }
-  body.commission .field input,
-  body.commission .field select,
-  body.commission .field textarea {
+  body.commission .req { color: #b3122b; }
+
+  /* shared input look: typed value on a ruled line */
+  body.commission input[type="text"],
+  body.commission input[type="email"],
+  body.commission textarea {
     width: 100%;
     box-sizing: border-box;
     font-family: inherit;
@@ -104,63 +124,87 @@
     background: transparent;
     border: none;
     border-bottom: 1px solid #999;
-    padding: 8px 2px;
+    padding: 7px 2px;
   }
-  body.commission .field textarea {
+  body.commission textarea {
     border: 1px solid #999;
-    min-height: 110px;
+    min-height: 96px;
     resize: vertical;
     padding: 8px;
   }
-  body.commission .field input:focus,
-  body.commission .field select:focus,
-  body.commission .field textarea:focus {
-    outline: none;
-    border-color: #b3122b;
+  body.commission input:focus, body.commission textarea:focus, body.commission select:focus {
+    outline: none; border-color: #b3122b;
   }
-  body.commission .row {
-    display: flex;
-    gap: 24px;
-    flex-wrap: wrap;
-  }
-  body.commission .row .field { flex: 1; min-width: 200px; }
 
-  body.commission button.submit {
-    margin-top: 8px;
-    font-family: inherit;
-    font-size: 14px;
+  /* REQUEST FROM block */
+  body.commission .inv-block { margin-bottom: 30px; }
+  body.commission .inv-block .pair { display: flex; gap: 28px; flex-wrap: wrap; }
+  body.commission .inv-block .pair > div { flex: 1; min-width: 200px; }
+  body.commission .inv-block .mini { font-size: 10px; letter-spacing: 0.5px; color: #777; text-transform: uppercase; margin-bottom: 3px; }
+
+  /* line-item table */
+  body.commission .inv-table { margin-bottom: 28px; }
+  body.commission .inv-colhead {
+    display: flex;
+    font-size: 10px;
     font-weight: 700;
     letter-spacing: 1px;
     text-transform: uppercase;
-    color: #f5f1e6;
-    background: #b3122b;
-    border: none;
-    padding: 12px 28px;
-    cursor: pointer;
+    color: #1a1a1a;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #1a1a1a;
+  }
+  body.commission .inv-colhead .c-qty { width: 52px; flex: none; }
+  body.commission .inv-line { display: flex; padding-top: 12px; }
+  body.commission .inv-line .c-qty { width: 52px; flex: none; font-size: 14px; color: #555; padding-top: 6px; }
+  body.commission .inv-line .c-desc { flex: 1; }
+  body.commission .inv-line .ref-row { display: flex; align-items: baseline; gap: 8px; margin-top: 10px; }
+  body.commission .inv-line .ref-row .ref-tag { font-size: 10px; letter-spacing: 1px; color: #777; white-space: nowrap; }
+
+  /* totals block, right-aligned money column */
+  body.commission .inv-totals {
+    margin-left: auto;
+    width: 320px;
+    max-width: 100%;
+    margin-bottom: 34px;
+  }
+  body.commission .inv-totals .t-row { display: flex; align-items: baseline; gap: 14px; margin-bottom: 10px; }
+  body.commission .inv-totals .t-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+    color: #1a1a1a; white-space: nowrap; width: 130px; flex: none; text-align: right;
+  }
+  body.commission .inv-totals .t-val { flex: 1; }
+
+  /* submit + footer */
+  body.commission button.submit {
+    font-family: inherit; font-size: 14px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; color: #ffffff; background: #b3122b;
+    border: none; padding: 12px 28px; cursor: pointer;
   }
   body.commission button.submit:hover { background: #8c0e21; }
+  body.commission button.submit:disabled { opacity: 0.6; cursor: default; }
 
-  body.commission .sheet-footer {
-    margin-top: 30px;
-    border-top: 1px solid #ccc;
-    padding-top: 12px;
+  body.commission .inv-foot {
+    display: flex; justify-content: space-between; align-items: flex-end; gap: 16px;
+    margin-top: 26px; padding-top: 12px; border-top: 1px solid #ccc;
     font-size: 11px;
-    color: #777;
-    text-align: center;
   }
+  body.commission .inv-foot .note { color: #b3122b; max-width: 60%; }
+  body.commission .inv-foot .thanks { color: #b3122b; font-weight: 700; white-space: nowrap; }
 
-  /* madlibs intro line with inline request-type select */
-  body.commission .madlib { font-size: 18px; line-height: 1.9; color: #1a1a1a; margin: 0 0 28px; }
-  body.commission .madlib select {
-    font-family: inherit; font-size: 18px; font-weight: 700; color: #b3122b;
-    background: transparent; border: none; border-bottom: 2px solid #b3122b;
-    padding: 2px 4px; cursor: pointer;
-  }
-  body.commission .madlib select:focus { outline: none; }
+  /* confirmation state */
+  body.commission .confirm { display: none; font-size: 14px; line-height: 1.7; color: #1a1a1a; }
+  body.commission .confirm b { color: #b3122b; }
+  body.commission.sent form { display: none; }
+  body.commission.sent .confirm { display: block; }
 
-  @media (max-width: 560px) {
+  @media (max-width: 640px) {
     body.commission .paper { padding: 28px 22px 32px; }
-    body.commission .letterhead h1 { font-size: 21px; }
+    body.commission .inv-head { flex-direction: column; }
+    body.commission .inv-meta { min-width: 0; width: 100%; box-sizing: border-box; }
+    body.commission .inv-issuer h1 { font-size: 21px; }
+    body.commission .inv-totals { width: 100%; }
+    body.commission .inv-totals .t-label { width: 110px; }
   }
 </style>
 </head>
@@ -170,16 +214,21 @@
   </div>
 
   <main class="paper">
-    <div class="letterhead">
-      <h1>Request Protocol</h1>
-      <div class="sub">
-        <span>phonetucked.dev</span>
-        <span>Form&nbsp;No. PT&#8209;001</span>
+    <div class="inv-head">
+      <div class="inv-issuer">
+        <h1>Request Protocol</h1>
+        <div class="sub">phonetucked.dev<br>commission intake</div>
+      </div>
+      <div class="inv-meta">
+        <div class="m-row"><span class="m-label">FORM NO.</span><span class="m-val" id="form-no">PT-—</span></div>
+        <div class="m-row"><span class="m-label">DATE</span><span class="m-val" id="form-date">————</span></div>
+        <div class="m-row"><span class="m-label">PAGE</span><span class="m-val">1 OF 1</span></div>
       </div>
     </div>
 
-    <form action="https://formspree.io/f/mdavqqkw" method="POST">
+    <form id="request-form" action="https://formspree.io/f/mdavqqkw" method="POST">
       <input type="hidden" name="_subject" value="New request — phonetucked">
+      <input type="hidden" name="request_id" id="request-id" value="">
       <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
 
       <p class="madlib">Initialize a
@@ -191,44 +240,121 @@
           <option value="Other">Other</option>
         </select> request.</p>
 
-      <div class="row">
-        <div class="field">
-          <label for="name">Name <span class="req">*</span></label>
-          <input type="text" id="name" name="name" required>
-        </div>
-        <div class="field">
-          <label for="email">Email <span class="req">*</span></label>
-          <input type="email" id="email" name="email" required>
+      <div class="inv-block">
+        <div class="blk-label">Request From</div>
+        <div class="pair">
+          <div>
+            <div class="mini">Name <span class="req">*</span></div>
+            <input type="text" name="name" required>
+          </div>
+          <div>
+            <div class="mini">Email <span class="req">*</span></div>
+            <input type="email" name="email" required>
+          </div>
         </div>
       </div>
 
-      <div class="field">
-        <label for="description">Description &amp; Details <span class="req">*</span></label>
-        <textarea id="description" name="description" required placeholder="What do you have in mind? Subject, size, quantity, style, intended use…"></textarea>
-      </div>
-
-      <div class="field">
-        <label for="references">Reference Links</label>
-        <input type="text" id="references" name="references" placeholder="Image links, inspiration, examples…">
-      </div>
-
-      <div class="row">
-        <div class="field">
-          <label for="budget">Budget</label>
-          <input type="text" id="budget" name="budget" placeholder="e.g. $200–$400">
+      <div class="inv-table">
+        <div class="inv-colhead">
+          <span class="c-qty">QTY</span>
+          <span class="c-desc">Description &amp; Details <span class="req">*</span></span>
         </div>
-        <div class="field">
-          <label for="deadline">Deadline / Timeline</label>
-          <input type="text" id="deadline" name="deadline" placeholder="e.g. by Aug 1, flexible…">
+        <div class="inv-line">
+          <span class="c-qty">01</span>
+          <div class="c-desc">
+            <textarea name="description" required placeholder="What do you have in mind? Subject, size, quantity, style, intended use…"></textarea>
+            <div class="ref-row">
+              <span class="ref-tag">REF:</span>
+              <input type="text" name="references" placeholder="Image links, inspiration, examples…">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="inv-totals">
+        <div class="t-row">
+          <span class="t-label">Budget</span>
+          <span class="t-val"><input type="text" name="budget" placeholder="e.g. $200–$400"></span>
+        </div>
+        <div class="t-row">
+          <span class="t-label">Deadline / Timeline</span>
+          <span class="t-val"><input type="text" name="deadline" placeholder="e.g. by Aug 1, flexible…"></span>
         </div>
       </div>
 
       <button class="submit" type="submit">Submit Request</button>
 
-      <div class="sheet-footer">
-        Submissions are sent directly to phonetucked. You will receive a reply by email.
+      <div class="inv-foot">
+        <div class="note">Please reference Form No. <span id="form-no-foot">PT-—</span> when corresponding.</div>
+        <div class="thanks">Thank you &#8594;</div>
       </div>
     </form>
+
+    <div class="confirm">
+      <p>Request <b id="confirm-no">PT-—</b> received.</p>
+      <p>A reply is en route to your email. Reference this number when corresponding.</p>
+      <p><a class="back" style="color:#b3122b" href="../index.html">&#8592; back to index</a></p>
+    </div>
   </main>
+
+<script>
+(function () {
+  var form = document.getElementById('request-form');
+  var pad = function (n) { return n < 1000 ? ('00' + n).slice(-3) : String(n); };
+
+  // today's date in the meta table
+  var d = new Date();
+  var iso = d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
+  document.getElementById('form-date').textContent = iso;
+
+  function fallbackRef() {
+    var ymd = iso.replace(/-/g, '');
+    var code = Math.random().toString(36).toUpperCase().slice(2, 6);
+    return 'PT-' + ymd + '-' + code;
+  }
+
+  async function assignNumber() {
+    try {
+      var res = await fetch('/api/next-number', { method: 'POST' });
+      if (!res.ok) throw new Error('counter unavailable');
+      var data = await res.json();
+      if (typeof data.number !== 'number') throw new Error('bad response');
+      return 'PT-' + pad(data.number);
+    } catch (e) {
+      return fallbackRef();
+    }
+  }
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    var btn = form.querySelector('button.submit');
+    btn.disabled = true;
+    btn.textContent = 'Submitting…';
+
+    var ref = await assignNumber();
+    document.getElementById('request-id').value = ref;
+    var subj = form.querySelector('input[name="_subject"]');
+    subj.value = 'New request ' + ref + ' — phonetucked';
+
+    try {
+      var resp = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (!resp.ok) throw new Error('submit failed');
+      document.getElementById('form-no').textContent = ref;
+      document.getElementById('form-no-foot').textContent = ref;
+      document.getElementById('confirm-no').textContent = ref;
+      document.body.classList.add('sent');
+      window.scrollTo(0, 0);
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = 'Submit Request';
+      alert('Something went wrong sending your request. Please try again, or email phonetucked directly.');
+    }
+  });
+})();
+</script>
 </body>
 </html>
