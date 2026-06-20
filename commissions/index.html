@@ -135,6 +135,35 @@
     resize: vertical;
     padding: 8px;
   }
+
+  /* rich-text description editor */
+  body.commission .rt-bar {
+    display: flex;
+    width: max-content;
+    border: 1px solid #1a1a1a;
+    border-bottom: none;
+  }
+  body.commission .rt-bar button {
+    font-family: inherit; font-size: 13px; line-height: 1;
+    width: 32px; height: 28px;
+    background: #ffffff; color: #1a1a1a;
+    border: none; border-right: 1px solid #1a1a1a;
+    cursor: pointer; padding: 0;
+  }
+  body.commission .rt-bar button:last-child { border-right: none; }
+  body.commission .rt-bar button:hover { background: #1a1a1a; color: #ffffff; }
+  body.commission .rt-bar button .hl { background: #fff14d; color: #1a1a1a; padding: 0 3px; }
+  body.commission .rt-area {
+    border: 1px solid #1a1a1a;
+    min-height: 300px;
+    padding: 12px;
+    overflow: auto;
+    resize: vertical;
+    font-size: 12px; line-height: 1.55; color: #1a1a1a;
+    outline: none;
+  }
+  body.commission .rt-area mark,
+  body.commission .rt-area [style*="background"] { background: #fff14d; }
   body.commission input:focus, body.commission textarea:focus, body.commission select:focus {
     outline: none; border-color: #1a1a1a;
   }
@@ -267,7 +296,16 @@
         <div class="inv-line">
           <span class="c-qty">01</span>
           <div class="c-desc">
-            <textarea name="description" required></textarea>
+            <div class="rt">
+              <div class="rt-bar">
+                <button type="button" data-cmd="bold" title="Bold"><b>B</b></button>
+                <button type="button" data-cmd="italic" title="Italic"><i>I</i></button>
+                <button type="button" data-cmd="underline" title="Underline"><u>U</u></button>
+                <button type="button" data-cmd="hilite" title="Highlight"><span class="hl">H</span></button>
+              </div>
+              <div class="rt-area" id="rt-area" contenteditable="true" role="textbox" aria-multiline="true"></div>
+            </div>
+            <input type="hidden" name="description" id="description-field">
             <div class="ref-row">
               <span class="ref-tag">REF:</span>
               <input type="text" name="references">
@@ -331,8 +369,32 @@
     }
   }
 
+  // rich-text toolbar (bold / italic / underline / highlight)
+  var rtArea = document.getElementById('rt-area');
+  document.querySelectorAll('.rt-bar button').forEach(function (b) {
+    b.addEventListener('mousedown', function (e) { e.preventDefault(); }); // keep selection on click
+    b.addEventListener('click', function () {
+      rtArea.focus();
+      var cmd = b.getAttribute('data-cmd');
+      try { document.execCommand('styleWithCSS', false, true); } catch (e) {}
+      if (cmd === 'hilite') {
+        if (!document.execCommand('hiliteColor', false, '#fff14d')) {
+          document.execCommand('backColor', false, '#fff14d');
+        }
+      } else {
+        document.execCommand(cmd, false, null);
+      }
+    });
+  });
+
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
+    if (!rtArea.textContent.trim()) {
+      alert('Please describe your request in the Description box.');
+      rtArea.focus();
+      return;
+    }
+    document.getElementById('description-field').value = rtArea.innerHTML;
     var btn = form.querySelector('button.submit');
     btn.disabled = true;
     btn.textContent = 'Submitting…';
