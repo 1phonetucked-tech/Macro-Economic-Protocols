@@ -76,7 +76,9 @@
   body.commission .inv-logo {
     display: block;
     width: 150px;
-    height: auto;
+    height: 83px;            /* crops the baked-in top/bottom whitespace so the grid sits flush */
+    object-fit: cover;
+    object-position: center;
     margin-bottom: 14px;
   }
   body.commission .inv-issuer h1 {
@@ -335,7 +337,7 @@
             </div>
             <input type="hidden" name="description" id="description-field">
             <div class="ref-row">
-              <span class="ref-tag">[ REF ]</span>
+              <span class="ref-tag">[ References ]</span>
               <input type="text" name="references">
             </div>
           </div>
