@@ -56,6 +56,16 @@
   body.commission textarea,
   body.commission .rt-area { text-transform: none; }
 
+  /* technical: monospace for entered data + readout values */
+  body.commission input[type="text"],
+  body.commission input[type="email"],
+  body.commission .rt-area,
+  body.commission .inv-meta .m-val,
+  body.commission #form-no-foot,
+  body.commission #confirm-no {
+    font-family: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  }
+
   /* ===== invoice header: issuer left, meta grid right ===== */
   body.commission .inv-head {
     display: flex;
@@ -173,7 +183,7 @@
     cursor: pointer; padding: 0;
   }
   body.commission .rt-bar button:last-child { border-right: none; }
-  body.commission .rt-bar button:hover { background: #1a1a1a; color: #ffffff; }
+  body.commission .rt-bar button:hover { background: #f0f0f0; color: #1a1a1a; }
   body.commission .rt-bar button .hl { background: #fff14d; color: #1a1a1a; padding: 0 3px; }
   body.commission .rt-area {
     border: none;
