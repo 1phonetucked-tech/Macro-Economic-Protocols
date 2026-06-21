@@ -288,47 +288,26 @@ body.home .home-legend {
     white-space: nowrap;
 }
 
-/* Logo under the legend (matched to the request-protocol button width) */
+/* Logo under the legend */
 body.home .home-logo {
     display: block;
     width: 150px;
     height: auto;
 }
 
-/* Request Protocol button: node-link graph that tapers to an arrow tip */
-body.home .rp-graph {
-    position: fixed;
-    left: 5%;
-    bottom: 20%;
-    z-index: 3;
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    text-align: center;
-    text-decoration: none;
-    cursor: pointer;
-    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
-                filter 0.2s ease;
-}
-body.home .rp-graph .rp-edges line {
-    stroke: #ffffff;
-    stroke-width: 1;
-}
-body.home .rp-graph .rp-nodes circle {
-    fill: #29c2ec;
-}
-body.home .rp-label {
+/* Request Protocol: bracketed text link under the logo */
+body.home .rp-link {
     font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
-    font-size: 12px;
-    font-weight: bold;
+    font-size: 13px;
     letter-spacing: 0.04em;
     color: #29c2ec;
+    text-decoration: none;
+    transition: filter 0.2s ease, opacity 0.2s ease;
 }
-body.home .rp-graph:hover,
-body.home .rp-graph:focus {
-    transform: translateX(5px);
+body.home .rp-link:hover,
+body.home .rp-link:focus {
     filter: drop-shadow(0 0 5px rgba(41, 194, 236, 0.65));
+    opacity: 0.85;
 }
 
 /* Smaller screens: shrink the chart text + stack the legend */
@@ -344,7 +323,7 @@ body.home .rp-graph:focus {
         gap: 2px;
     }
     body.home .home-logo { width: 120px; }
-    body.home .rp-graph svg { width: 120px; height: 64px; }
+    body.home .rp-link { font-size: 12px; }
     body.home header.home-title h1 { font-size: 22px; }
     body.gallery-graph header h1 { font-size: 20px; }
     /* longer titles (e.g. Protocol Accessories) shrink to stay on one line like Benchmark */
