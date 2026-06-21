@@ -52,20 +52,11 @@
     background: #ffffff;
     color: #1a1a1a;
     border: none;
-    box-shadow: 0 0 40px rgba(255, 255, 255, 0.12);
     padding: 26px 44px 24px;
     box-sizing: border-box;
     font-size: 11px;
     line-height: 1.5;
     text-transform: lowercase;
-    animation: paper-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
-  }
-  @keyframes paper-in {
-    from { opacity: 0; transform: translateY(14px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    body.commission .paper { animation: none; }
   }
   body.commission form#request-form {
     flex: 1;
@@ -156,8 +147,7 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%231a1a1a'/%3E%3C/svg%3E");
     background-repeat: no-repeat; background-position: right 8px center; background-size: 8px;
   }
-  body.commission .madlib select { transition: border-color 0.2s ease, box-shadow 0.2s ease; }
-  body.commission .madlib select:focus { outline: none; border-color: #29c2ec; box-shadow: 0 0 0 1px #29c2ec inset; }
+  body.commission .madlib select:focus { border-color: #29c2ec; }
 
   /* generic uppercase section label, like BILL TO */
   body.commission .blk-label {
@@ -184,29 +174,15 @@
     border-bottom: 1px solid #999;
     padding: 7px 2px;
   }
-  /* animated cyan underline that grows in on focus */
-  body.commission input[type="text"],
-  body.commission input[type="email"] {
-    background-image: linear-gradient(#29c2ec, #29c2ec);
-    background-repeat: no-repeat;
-    background-position: left bottom;
-    background-size: 0% 2px;
-    transition: background-size 0.28s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  body.commission input[type="text"]:focus,
-  body.commission input[type="email"]:focus {
-    background-size: 100% 2px;
-  }
   body.commission textarea {
     border: 1px solid #999;
     min-height: 96px;
     resize: vertical;
     padding: 8px;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
   }
 
   /* rich-text description editor */
-  body.commission .rt { border: 1px solid #1a1a1a; flex: 1; display: flex; flex-direction: column; min-height: 0; transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+  body.commission .rt { border: 1px solid #1a1a1a; flex: 1; display: flex; flex-direction: column; min-height: 0; }
   body.commission .rt-bar {
     display: flex;
     position: relative;
@@ -253,12 +229,8 @@
   }
   body.commission .rt-area mark,
   body.commission .rt-area [style*="background"] { background: #fff14d; }
-  body.commission input:focus, body.commission textarea:focus, body.commission select:focus {
-    outline: none; border-color: #29c2ec;
-  }
-  body.commission textarea:focus,
+  body.commission input:focus, body.commission textarea:focus, body.commission select:focus,
   body.commission .rt:focus-within {
-    box-shadow: 0 0 0 1px #29c2ec inset;
     border-color: #29c2ec;
   }
 
