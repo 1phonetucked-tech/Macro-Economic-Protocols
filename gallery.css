@@ -288,10 +288,10 @@ body.home .home-legend {
     white-space: nowrap;
 }
 
-/* Logo under the legend */
+/* Logo under the legend (matched to the request-protocol button width) */
 body.home .home-logo {
     display: block;
-    width: 200px;
+    width: 150px;
     height: auto;
 }
 
@@ -299,7 +299,7 @@ body.home .home-logo {
 body.home .rp-graph {
     position: fixed;
     left: 5%;
-    bottom: 34%;
+    bottom: 20%;
     z-index: 3;
     display: inline-flex;
     flex-direction: column;
@@ -343,7 +343,7 @@ body.home .rp-graph:focus {
         flex-direction: column;
         gap: 2px;
     }
-    body.home .home-logo { width: 150px; }
+    body.home .home-logo { width: 120px; }
     body.home .rp-graph svg { width: 120px; height: 64px; }
     body.home header.home-title h1 { font-size: 22px; }
     body.gallery-graph header h1 { font-size: 20px; }
