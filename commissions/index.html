@@ -13,32 +13,43 @@
     font-family: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, "Liberation Mono", monospace;
     font-size: 11px;
     line-height: 1.55;
-    padding: 28px 22px 60px;
+    padding: 28px 22px 28px;
+    min-height: 100vh;
+    box-sizing: border-box;
   }
   .wrap { max-width: 760px; }
   a { color: #1597bb; }
 
+  /* plain top-down flow, generous spacing between blocks */
+  .blk { margin: 0 0 46px; }
+
   h1 { font-size: 13px; font-weight: 700; margin: 0; letter-spacing: 0; }
-  .rule { white-space: pre; margin: 0 0 14px; }       /* ===== underline */
+  .rule { white-space: pre; margin: 0 0 14px; }       /* arrow rule */
 
   /* meta grid */
   .intake { margin: 0 0 8px; }
-  table.meta { border-collapse: collapse; margin: 0 0 20px; }
+  table.meta { border-collapse: collapse; margin: 0 0 8px; }
   table.meta td { border: 1px solid #111; padding: 3px 12px; text-transform: lowercase; }
 
-  .sec { margin: 22px 0 10px; font-weight: 700; }
-  .req { color: #111; }
+  .sec { margin: 0 0 12px; font-weight: 700; }
+  .req { color: #29c2ec; }
 
-  .field { margin: 0 0 8px; }
+  .field { margin: 0 0 12px; }
+  .field:last-child { margin-bottom: 0; }
   label.k { display: inline-block; width: 84px; }
   input[type=text], input[type=email] {
     font: inherit; border: 1px solid #111; background: #fff; color: #111;
     padding: 2px 4px; width: 340px; max-width: 100%; box-sizing: border-box;
   }
+  input.wide { width: 480px; }
+  input[type=file] { font: inherit; }
   input[type=text]:focus, input[type=email]:focus, select:focus { outline: none; border-color: #29c2ec; }
   select {
-    font: inherit; border: 1px solid #111; background: #fff; color: #111;
-    padding: 1px 2px; cursor: pointer;
+    font: inherit; border: 1px solid #111; border-radius: 0; background: #fff; color: #111;
+    padding: 1px 20px 1px 4px; cursor: pointer;
+    -webkit-appearance: none; -moz-appearance: none; appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23111'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 6px center; background-size: 8px;
   }
 
   /* rich-text editor */
@@ -61,7 +72,6 @@
   .rt-bar:has(button:nth-of-type(2):hover) .rt-slide { transform: translateX(100%); opacity: 1; }
   .rt-bar:has(button:nth-of-type(3):hover) .rt-slide { transform: translateX(200%); opacity: 1; }
   .rt-bar:has(button:nth-of-type(4):hover) .rt-slide { transform: translateX(300%); opacity: 1; }
-  .rt-bar .hl { background: #fff14d; color: #111; padding: 0 3px; }
   .rt-area { min-height: 96px; padding: 8px; outline: none; }
   .rt-area mark, .rt-area [style*="background"] { background: #fff14d; }
 
@@ -87,46 +97,57 @@
     <input type="hidden" name="request_id" id="request-id" value="">
     <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
 
-    <h1>Request Protocol</h1>
-    <div class="rule">-----&gt;</div>
+    <div class="blk">
+      <h1>Request Protocol</h1>
+      <div class="rule">-----&gt;</div>
 
-    <div class="intake">Porting / commission intake</div>
-    <table class="meta">
-      <tr><td>FORM NO.</td><td id="form-no">PT-—</td></tr>
-      <tr><td>DATE</td><td id="form-date">————</td></tr>
-      <tr><td>PAGE</td><td>1 of 1</td></tr>
-    </table>
-
-    <div class="sec">Contact</div>
-    <div class="field"><label class="k">Name:</label><input type="text" name="name" required> <span class="req">*</span></div>
-    <div class="field"><label class="k">Email:</label><input type="email" name="email" required> <span class="req">*</span></div>
-
-    <p>Initialize a
-      <select id="type" name="commission_type">
-        <option value="Web Build">web build</option>
-        <option value="PCB &amp; Hardware">pcb &amp; hardware</option>
-        <option value="Strategy &amp; Direction">strategy &amp; direction</option>
-        <option value="Systems Engineering">systems engineering</option>
-        <option value="General Inquiry">general inquiry</option>
-      </select> request.</p>
-
-    <div class="sec">Specification <span class="req">*</span></div>
-    <div class="rt">
-      <div class="rt-bar">
-        <button type="button" data-cmd="bold" title="Bold"><b>bold</b></button>
-        <button type="button" data-cmd="italic" title="Italic"><i>italic</i></button>
-        <button type="button" data-cmd="underline" title="Underline"><u>underline</u></button>
-        <button type="button" data-cmd="hilite" title="Highlight"><span class="hl">highlight</span></button>
-        <span class="rt-slide" aria-hidden="true"></span>
-      </div>
-      <div class="rt-area" id="rt-area" contenteditable="true" role="textbox" aria-multiline="true"></div>
+      <div class="intake">Porting / commission intake</div>
+      <table class="meta">
+        <tr><td>FORM NO.</td><td id="form-no">PT-—</td></tr>
+        <tr><td>DATE</td><td id="form-date">————</td></tr>
+        <tr><td>PAGE</td><td>1 of 1</td></tr>
+      </table>
     </div>
-    <input type="hidden" name="description" id="description-field">
-    <div class="field" style="margin-top:8px"><label class="k">Refs:</label><input type="text" name="references"></div>
 
-    <div class="sec">Terms</div>
-    <div class="field"><label class="k">Budget:</label><input type="text" name="budget"></div>
-    <div class="field"><label class="k">Deadline:</label><input type="text" name="deadline"></div>
+    <div class="blk">
+      <div class="sec">Contact</div>
+      <div class="field"><label class="k">Name:</label><input type="text" name="name" required> <span class="req">*</span></div>
+      <div class="field"><label class="k">Email:</label><input type="email" name="email" required> <span class="req">*</span></div>
+    </div>
+
+    <div class="blk">
+      <p>Initialize a
+        <select id="type" name="commission_type">
+          <option value="Web Build">web build</option>
+          <option value="PCB &amp; Hardware">pcb &amp; hardware</option>
+          <option value="Strategy &amp; Direction">strategy &amp; direction</option>
+          <option value="Systems Engineering">systems engineering</option>
+          <option value="General Inquiry">general inquiry</option>
+        </select> request.</p>
+    </div>
+
+    <div class="blk">
+      <div class="sec">Specification <span class="req">*</span></div>
+      <div class="rt">
+        <div class="rt-bar">
+          <button type="button" data-cmd="bold" title="Bold"><b>bold</b></button>
+          <button type="button" data-cmd="italic" title="Italic"><i>italic</i></button>
+          <button type="button" data-cmd="underline" title="Underline"><u>underline</u></button>
+          <button type="button" data-cmd="hilite" title="Highlight">highlight</button>
+          <span class="rt-slide" aria-hidden="true"></span>
+        </div>
+        <div class="rt-area" id="rt-area" contenteditable="true" role="textbox" aria-multiline="true"></div>
+      </div>
+      <input type="hidden" name="description" id="description-field">
+      <div class="field" style="margin-top:28px"><label class="k">Refs:</label><input type="text" name="references" class="wide"></div>
+      <div class="field"><label class="k">Files:</label><input type="file" name="attachment" multiple></div>
+    </div>
+
+    <div class="blk">
+      <div class="sec">Terms</div>
+      <div class="field"><label class="k">Budget:</label><input type="text" name="budget"></div>
+      <div class="field"><label class="k">Deadline:</label><input type="text" name="deadline"></div>
+    </div>
 
     <button class="submit" type="submit">[ Submit Request ]</button>
   </form>
