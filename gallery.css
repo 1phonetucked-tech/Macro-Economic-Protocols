@@ -214,7 +214,7 @@ body.home header.home-title h1 {
     stroke: rgba(255, 255, 255, 0.16);
 }
 #chart .axis {
-    stroke: #b3122b;
+    stroke: #29c2ec;
     stroke-width: 1.5;
 }
 #chart .axis-label text {
@@ -235,9 +235,9 @@ body.home header.home-title h1 {
     transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
                 filter 0.2s ease;
 }
-#chart .lp-navy circle { fill: #b3122b; }
-#chart .lp-cyan circle { fill: #b3122b; }
-#chart .lp-magenta circle { fill: #b3122b; }
+#chart .lp-navy circle { fill: #29c2ec; }
+#chart .lp-cyan circle { fill: #29c2ec; }
+#chart .lp-magenta circle { fill: #29c2ec; }
 /* Nodes pop up on hover / click */
 #chart .link-point:hover circle,
 #chart .link-point:focus circle,
@@ -251,7 +251,7 @@ body.home header.home-title h1 {
 #chart .link-label {
     font-size: 15px;
     font-weight: bold;
-    fill: #b3122b;
+    fill: #29c2ec;
     filter: drop-shadow(2px 2px 0 #ffffff);
     pointer-events: none;
     transform-box: fill-box;
@@ -263,12 +263,20 @@ body.home header.home-title h1 {
     transform: translateY(-3px) scale(1.06);
 }
 
-/* Legend box (HTML overlay carrying the publish/update dates) */
-body.home .home-legend {
+/* Top-left overlay column: legend + logo + request-protocol button */
+body.home .home-stack {
     position: fixed;
     top: 13%;
     left: 5%;
     z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+}
+
+/* Legend box (HTML overlay carrying the publish/update dates) */
+body.home .home-legend {
     display: flex;
     gap: 18px;
     border: 1px solid #ffffff;
@@ -280,15 +288,57 @@ body.home .home-legend {
     white-space: nowrap;
 }
 
+/* Logo under the legend */
+body.home .home-logo {
+    display: block;
+    width: 120px;
+    height: auto;
+}
+
+/* Request Protocol button: node-link graph that tapers to an arrow tip */
+body.home .rp-graph {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 6px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+                filter 0.2s ease;
+}
+body.home .rp-graph .rp-edges line {
+    stroke: #ffffff;
+    stroke-width: 1;
+}
+body.home .rp-graph .rp-nodes circle {
+    fill: #29c2ec;
+}
+body.home .rp-label {
+    font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0.04em;
+    color: #29c2ec;
+}
+body.home .rp-graph:hover,
+body.home .rp-graph:focus {
+    transform: translateX(5px);
+    filter: drop-shadow(0 0 5px rgba(41, 194, 236, 0.65));
+}
+
 /* Smaller screens: shrink the chart text + stack the legend */
 @media (max-width: 800px) {
     #chart .axis-label text { font-size: 11px; }
     #chart .link-label { font-size: 13px; }
+    body.home .home-stack {
+        top: 11%;
+        gap: 12px;
+    }
     body.home .home-legend {
         flex-direction: column;
         gap: 2px;
-        top: 12%;
     }
+    body.home .home-logo { width: 96px; }
+    body.home .rp-graph svg { width: 120px; height: 51px; }
     body.home header.home-title h1 { font-size: 22px; }
     body.gallery-graph header h1 { font-size: 20px; }
     /* longer titles (e.g. Protocol Accessories) shrink to stay on one line like Benchmark */
@@ -318,7 +368,7 @@ body.gallery-graph {
 }
 .graph-bg .grid line { stroke: rgba(255, 255, 255, 0.30); stroke-width: 0.6; }
 .graph-bg .grid .vline { stroke: rgba(255, 255, 255, 0.16); }
-.graph-bg .axis { stroke: #b3122b; stroke-width: 1.5; }
+.graph-bg .axis { stroke: #29c2ec; stroke-width: 1.5; }
 .graph-bg .series line { stroke: #ffffff; stroke-width: 0.8; }
 
 /* header: back link + title */
