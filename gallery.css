@@ -299,7 +299,7 @@ body.home .home-logo {
 body.home .rp-graph {
     position: fixed;
     left: 5%;
-    bottom: 14%;
+    bottom: 34%;
     z-index: 3;
     display: inline-flex;
     flex-direction: column;

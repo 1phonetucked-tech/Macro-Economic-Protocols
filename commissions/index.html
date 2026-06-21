@@ -5,7 +5,7 @@
 <title>Request Protocol</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Request Protocol — submit a request">
-<link href="../gallery.css?v=41" rel="stylesheet" type="text/css" media="all">
+<link href="../gallery.css?v=42" rel="stylesheet" type="text/css" media="all">
 <style>
   body.commission {
     margin: 0;
@@ -33,7 +33,7 @@
   }
   body.commission .topbar a.back {
     color: #ffffff;
-    font-weight: bold;
+    font-weight: 500;
     text-decoration: none;
     text-shadow: none;
   }
@@ -58,6 +58,14 @@
     font-size: 11px;
     line-height: 1.5;
     text-transform: lowercase;
+    animation: paper-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  @keyframes paper-in {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    body.commission .paper { animation: none; }
   }
   body.commission form#request-form {
     flex: 1;
@@ -134,12 +142,12 @@
   }
   body.commission .inv-meta .m-row + .m-row { border-top: 1px dotted #bbb; }
   body.commission .inv-meta .m-label { color: #555; letter-spacing: 0.5px; }
-  body.commission .inv-meta .m-val { font-weight: 700; color: #1a1a1a; }
+  body.commission .inv-meta .m-val { font-weight: 600; color: #1a1a1a; }
 
   /* madlib line */
   body.commission .madlib { font-size: 13px; line-height: 1.8; color: #1a1a1a; margin: 0 0 14px; }
   body.commission .madlib select {
-    font-family: inherit; font-size: 12px; font-weight: 700; color: #1a1a1a;
+    font-family: inherit; font-size: 12px; font-weight: 500; color: #1a1a1a;
     text-transform: lowercase; letter-spacing: 0.5px;
     background-color: #ffffff;
     border: 1px solid #1a1a1a; border-radius: 0;
@@ -148,12 +156,13 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%231a1a1a'/%3E%3C/svg%3E");
     background-repeat: no-repeat; background-position: right 8px center; background-size: 8px;
   }
-  body.commission .madlib select:focus { outline: none; border-color: #1a1a1a; box-shadow: 0 0 0 1px #1a1a1a inset; }
+  body.commission .madlib select { transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+  body.commission .madlib select:focus { outline: none; border-color: #29c2ec; box-shadow: 0 0 0 1px #29c2ec inset; }
 
   /* generic uppercase section label, like BILL TO */
   body.commission .blk-label {
     font-size: 11px;
-    font-weight: 700;
+    font-weight: 500;
     letter-spacing: 1px;
     text-transform: lowercase;
     color: #1a1a1a;
@@ -175,15 +184,29 @@
     border-bottom: 1px solid #999;
     padding: 7px 2px;
   }
+  /* animated cyan underline that grows in on focus */
+  body.commission input[type="text"],
+  body.commission input[type="email"] {
+    background-image: linear-gradient(#29c2ec, #29c2ec);
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    background-size: 0% 2px;
+    transition: background-size 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  body.commission input[type="text"]:focus,
+  body.commission input[type="email"]:focus {
+    background-size: 100% 2px;
+  }
   body.commission textarea {
     border: 1px solid #999;
     min-height: 96px;
     resize: vertical;
     padding: 8px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
   }
 
   /* rich-text description editor */
-  body.commission .rt { border: 1px solid #1a1a1a; flex: 1; display: flex; flex-direction: column; min-height: 0; }
+  body.commission .rt { border: 1px solid #1a1a1a; flex: 1; display: flex; flex-direction: column; min-height: 0; transition: border-color 0.2s ease, box-shadow 0.2s ease; }
   body.commission .rt-bar {
     display: flex;
     position: relative;
@@ -231,7 +254,12 @@
   body.commission .rt-area mark,
   body.commission .rt-area [style*="background"] { background: #fff14d; }
   body.commission input:focus, body.commission textarea:focus, body.commission select:focus {
-    outline: none; border-color: #1a1a1a;
+    outline: none; border-color: #29c2ec;
+  }
+  body.commission textarea:focus,
+  body.commission .rt:focus-within {
+    box-shadow: 0 0 0 1px #29c2ec inset;
+    border-color: #29c2ec;
   }
 
   /* REQUEST FROM block */
@@ -244,7 +272,7 @@
   body.commission .inv-totals .mini { font-size: 10px; letter-spacing: 0.5px; color: #777; text-transform: lowercase; margin-bottom: 3px; }
 
   /* numbered sections (cyan number) */
-  body.commission .sec { font-size: 10px; font-weight: 700; letter-spacing: 1px; color: #1a1a1a; margin: 0 0 8px; }
+  body.commission .sec { font-size: 10px; font-weight: 500; letter-spacing: 1px; color: #1a1a1a; margin: 0 0 8px; }
   body.commission .cn { color: #29c2ec; margin-right: 8px; font-variant-numeric: tabular-nums; }
 
   /* header rule + crosshair registration marks (technical-drawing framing) */
@@ -263,7 +291,7 @@
   body.commission .inv-colhead {
     display: flex;
     font-size: 10px;
-    font-weight: 700;
+    font-weight: 500;
     letter-spacing: 1px;
     text-transform: lowercase;
     color: #1a1a1a;
@@ -286,14 +314,14 @@
   }
   body.commission .inv-totals .t-row { display: flex; align-items: baseline; gap: 14px; margin-bottom: 10px; }
   body.commission .inv-totals .t-label {
-    font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: lowercase;
+    font-size: 10px; font-weight: 500; letter-spacing: 1px; text-transform: lowercase;
     color: #1a1a1a; white-space: nowrap; width: 130px; flex: none; text-align: right;
   }
   body.commission .inv-totals .t-val { flex: 1; }
 
   /* submit + footer */
   body.commission button.submit {
-    font-family: inherit; font-size: 12px; font-weight: 700; letter-spacing: 1px;
+    font-family: inherit; font-size: 12px; font-weight: 500; letter-spacing: 1px;
     text-transform: lowercase; color: #1a1a1a; background: transparent;
     border: none; padding: 6px 2px; cursor: pointer;
   }
@@ -309,7 +337,7 @@
     font-size: 11px;
   }
   body.commission .inv-foot .note { color: #1a1a1a; max-width: 60%; }
-  body.commission .inv-foot .thanks { color: #1a1a1a; font-weight: 700; white-space: nowrap; }
+  body.commission .inv-foot .thanks { color: #1a1a1a; font-weight: 500; white-space: nowrap; }
 
   /* confirmation state */
   body.commission .confirm { display: none; font-size: 12px; line-height: 1.7; color: #1a1a1a; }
