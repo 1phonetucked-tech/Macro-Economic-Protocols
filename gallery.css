@@ -173,7 +173,7 @@ body.home {
     margin: 0;
     width: 100vw;
     height: 100vh;
-    height: 100svh; /* fit the visible area on mobile (accounts for browser bars) */
+    height: calc(85svh + 15lvh); /* a notch past the visible area to trim the black gap above Safari's toolbar */
     max-width: none;
     background-color: transparent;
 }
