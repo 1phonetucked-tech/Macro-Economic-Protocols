@@ -173,7 +173,7 @@ body.home {
     margin: 0;
     width: 100vw;
     height: 100vh;
-    height: 100svh; /* fit the visible area on mobile (accounts for browser bars) */
+    height: 100lvh; /* fill the entire screen on mobile (extends behind Safari's bars) */
     max-width: none;
     background-color: transparent;
 }
