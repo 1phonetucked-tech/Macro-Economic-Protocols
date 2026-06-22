@@ -173,7 +173,7 @@ body.home {
     margin: 0;
     width: 100vw;
     height: 100vh;
-    height: calc(50svh + 50lvh); /* halfway between visible area and full-screen on mobile */
+    height: 100svh; /* fit the visible area on mobile (accounts for browser bars) */
     max-width: none;
     background-color: transparent;
 }
