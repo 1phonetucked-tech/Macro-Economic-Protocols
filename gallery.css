@@ -333,7 +333,7 @@ body.home .rp-link:focus {
     #chart .link-label { font-size: 13px; }
     body.home .home-stack {
         top: 16%;
-        gap: 12px;
+        gap: 6px;
     }
     body.home .home-legend {
         align-self: center;
@@ -345,8 +345,8 @@ body.home .rp-link:focus {
         -webkit-text-size-adjust: 100%;
         text-size-adjust: 100%;
     }
-    body.home .home-logo { width: 120px; }
-    body.home .rp-link { width: 120px; font-size: 9px; }
+    body.home .home-logo { width: 80px; }
+    body.home .rp-link { width: 80px; font-size: 6px; }
     body.home header.home-title h1 { font-size: 22px; }
     body.gallery-graph header h1 { font-size: 20px; }
     /* longer titles (e.g. Protocol Accessories) shrink to stay on one line like Benchmark */
