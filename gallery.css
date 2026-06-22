@@ -351,7 +351,9 @@ body.home .rp-link:focus .r { transform: translateX(12px); }
     #chart .axis-label text { font-size: 11px; }
     #chart .link-label { font-size: 13px; }
     body.home .home-stack {
-        top: 16%;
+        position: absolute;
+        top: auto;
+        bottom: 75.6%; /* logo bottom edge rests on the value-20 gridline (24.4% from top) */
         gap: 5px;
     }
     body.home .home-legend {
@@ -365,7 +367,7 @@ body.home .rp-link:focus .r { transform: translateX(12px); }
         text-size-adjust: 100%;
     }
     body.home .home-logo { width: 92px; }
-    body.home .rp-link { font-size: 11px; right: 7%; bottom: 11%; }
+    body.home .rp-link { position: absolute; top: auto; bottom: 10%; right: 7%; font-size: 11px; } /* sits on the x-axis baseline (value 0 @ 90% from top) */
     body.home header.home-title h1 { font-size: 22px; }
     body.gallery-graph header h1 { font-size: 20px; }
     /* longer titles (e.g. Protocol Accessories) shrink to stay on one line like Benchmark */
