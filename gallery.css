@@ -315,6 +315,8 @@ body.home .rp-link {
     display: block;
     width: 150px;
     text-align: center;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
     color: #29c2ec;
     text-decoration: none;
     transition: filter 0.2s ease, opacity 0.2s ease;
