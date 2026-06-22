@@ -307,7 +307,8 @@ body.home .home-logo {
     height: auto;
 }
 
-/* Request Protocol: bracketed text link under the logo */
+/* Request Protocol: bracketed text link under the logo.
+   White words, cyan brackets + cyan blinking caret; brackets spread on hover. */
 body.home .rp-link {
     position: fixed;
     right: 6%;
@@ -315,15 +316,34 @@ body.home .rp-link {
     z-index: 3;
     font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
     font-size: 13px;
-    letter-spacing: 0.04em;
-    color: #29c2ec;
+    letter-spacing: 0.06em;
+    color: #ffffff;
     text-decoration: none;
-    transition: filter 0.2s ease, opacity 0.2s ease;
+    white-space: nowrap;
+    transition: text-shadow 0.2s ease;
 }
+body.home .rp-link .br {
+    display: inline-block;
+    color: #29c2ec;
+    transition: transform 0.25s ease;
+}
+body.home .rp-link .cur {
+    display: inline-block;
+    width: 0.55em;
+    color: #29c2ec;
+    animation: cblink 1.06s steps(1) infinite;
+}
+@keyframes cblink { 50% { opacity: 0; } }
 body.home .rp-link:hover,
 body.home .rp-link:focus {
-    filter: drop-shadow(0 0 5px rgba(41, 194, 236, 0.65));
-    opacity: 0.85;
+    text-shadow: 0 0 9px rgba(41, 194, 236, 0.45);
+}
+body.home .rp-link:hover .l,
+body.home .rp-link:focus .l { transform: translateX(-12px); }
+body.home .rp-link:hover .r,
+body.home .rp-link:focus .r { transform: translateX(12px); }
+@media (prefers-reduced-motion: reduce) {
+    body.home .rp-link .cur { animation: none; }
 }
 
 /* Smaller screens: shrink the chart text + stack the legend */
