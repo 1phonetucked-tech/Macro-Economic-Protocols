@@ -311,7 +311,7 @@ body.home .home-logo {
 body.home .rp-link {
     position: fixed;
     right: 4%;
-    bottom: 8%;
+    bottom: 13%;
     z-index: 3;
     font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
     font-size: 13px;
@@ -345,7 +345,7 @@ body.home .rp-link:focus {
         text-size-adjust: 100%;
     }
     body.home .home-logo { width: 92px; }
-    body.home .rp-link { font-size: 11px; right: 5%; bottom: 9%; }
+    body.home .rp-link { font-size: 11px; right: 5%; bottom: 13%; }
     body.home header.home-title h1 { font-size: 22px; }
     body.gallery-graph header h1 { font-size: 20px; }
     /* longer titles (e.g. Protocol Accessories) shrink to stay on one line like Benchmark */
