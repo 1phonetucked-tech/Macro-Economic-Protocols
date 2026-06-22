@@ -82,12 +82,21 @@
   .rt-area { min-height: 96px; padding: 8px; outline: none; background: #fff; color: #111; }
   .rt-area mark, .rt-area [style*="background"] { background: #fff14d; }
 
+  /* submit: borderless text CTA — white words, cyan brackets + cyan blinking caret,
+     brackets spread on hover (mirrors the homepage [ REQUEST PROTOCOL _ ] link) */
   .submit {
-    font: inherit; background: #fff; color: #111; border: 1px solid #111;
-    padding: 4px 10px; cursor: pointer; margin-top: 20px;
+    font-family: inherit; font-size: 13px; background: transparent; color: #fff;
+    border: none; padding: 0; cursor: pointer; margin-top: 20px;
+    letter-spacing: 0.06em; white-space: nowrap; transition: text-shadow 0.2s ease;
   }
-  .submit:hover { background: #29c2ec; }
-  .submit:disabled { opacity: .5; cursor: default; background: #fff; }
+  .submit .br { display: inline-block; color: #29c2ec; transition: transform 0.25s ease; }
+  .submit .cur { display: inline-block; width: 0.55em; color: #29c2ec; animation: cblink 1.06s steps(1) infinite; }
+  @keyframes cblink { 50% { opacity: 0; } }
+  .submit:hover, .submit:focus { text-shadow: 0 0 9px rgba(41,194,236,.45); }
+  .submit:hover .l, .submit:focus .l { transform: translateX(-12px); }
+  .submit:hover .r, .submit:focus .r { transform: translateX(12px); }
+  .submit:disabled { opacity: .5; cursor: default; }
+  @media (prefers-reduced-motion: reduce) { .submit .cur { animation: none; } }
 
   /* confirmation state */
   .confirm { display: none; }
@@ -163,7 +172,7 @@
       <div class="field"><label class="k">deadline</label><input type="text" name="deadline"></div>
     </div>
 
-    <button class="submit" type="submit">[ Submit Request ]</button>
+    <button class="submit" type="submit" aria-label="submit request"><span class="br l" aria-hidden="true">[</span> SUBMIT REQUEST <span class="cur" aria-hidden="true">_</span> <span class="br r" aria-hidden="true">]</span></button>
   </form>
 
   <div class="confirm">
@@ -269,7 +278,7 @@
       window.scrollTo(0, 0);
     } catch (err) {
       btn.disabled = false;
-      btn.textContent = '[ Submit Request ]';
+      btn.innerHTML = '<span class="br l" aria-hidden="true">[</span> SUBMIT REQUEST <span class="cur" aria-hidden="true">_</span> <span class="br r" aria-hidden="true">]</span>';
       alert('Something went wrong sending your request. Please try again, or email phonetucked directly.');
     }
   });
