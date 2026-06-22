@@ -367,7 +367,7 @@ body.home .rp-link:focus .r { transform: translateX(12px); }
         text-size-adjust: 100%;
     }
     body.home .home-logo { width: 104px; }
-    body.home .rp-link { position: absolute; top: auto; bottom: 12%; right: 7%; font-size: 11px; } /* just above the x-axis baseline (value 0 @ 90% from top) */
+    body.home .rp-link { position: absolute; top: auto; bottom: 11.5%; right: 7%; font-size: 11px; } /* just above the x-axis baseline (value 0 @ 90% from top) */
     body.home header.home-title h1 { font-size: 22px; }
     body.gallery-graph header h1 { font-size: 20px; }
     /* longer titles (e.g. Protocol Accessories) shrink to stay on one line like Benchmark */
