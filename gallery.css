@@ -214,7 +214,7 @@ body.home header.home-title h1 {
     stroke: rgba(255, 255, 255, 0.16);
 }
 #chart .axis {
-    stroke: #29c2ec;
+    stroke: #ffffff;
     stroke-width: 1.5;
 }
 #chart .axis-label text {
@@ -284,6 +284,7 @@ body.home .home-legend {
     background: rgba(0, 0, 0, 0.65);
     font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
     font-size: 12px;
+    font-weight: 400;
     color: #ffffff;
     white-space: nowrap;
 }
