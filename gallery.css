@@ -334,8 +334,14 @@ body.home .rp-link:focus {
         gap: 12px;
     }
     body.home .home-legend {
-        flex-direction: column;
-        gap: 2px;
+        align-self: center;
+        width: auto;
+        margin-top: 12px;
+        gap: 10px;
+        padding: 4px 8px;
+        font-size: 8px;
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
     }
     body.home .home-logo { width: 120px; }
     body.home .rp-link { width: 120px; font-size: 9px; }
