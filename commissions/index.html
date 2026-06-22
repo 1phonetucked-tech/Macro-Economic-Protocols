@@ -5,12 +5,15 @@
 <title>Request Protocol</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Request Protocol — submit a request">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   body {
     margin: 0;
-    background: #ffffff;
-    color: #111111;
-    font-family: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    background: #000000;
+    color: #ededed;
+    font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
     font-size: 11px;
     line-height: 1.55;
     padding: 28px 22px 28px;
@@ -18,20 +21,24 @@
     box-sizing: border-box;
   }
   .wrap { max-width: 760px; }
+  #request-form { margin-top: 56px; }
   a { color: #1597bb; }
 
   /* plain top-down flow, generous spacing between blocks */
   .blk { margin: 0 0 46px; }
 
-  h1 { font-size: 13px; font-weight: 700; margin: 0; letter-spacing: 0; }
-  .rule { white-space: pre; margin: 0 0 14px; }       /* arrow rule */
+  h1 { font-size: 22px; font-weight: 700; margin: 0 0 14px; letter-spacing: 0; }
+
+  /* masthead: logo over the title, pinned to the bottom-right corner */
+  .masthead { position: fixed; right: 24px; bottom: 18px; text-align: right; margin: 0; }
+  .masthead .logo { width: 150px; height: auto; }
+  .masthead h1 { margin: 8px 0 0; }
 
   /* meta grid */
-  .intake { margin: 0 0 8px; }
   table.meta { border-collapse: collapse; margin: 0 0 8px; }
-  table.meta td { border: 1px solid #111; padding: 3px 12px; text-transform: lowercase; }
+  table.meta td { border: 1px solid #29c2ec; padding: 3px 12px; text-transform: lowercase; }
 
-  .sec { margin: 0 0 12px; font-weight: 700; }
+  .sec { margin: 0 0 12px; font-weight: 400; text-decoration: underline; text-decoration-color: #29c2ec; text-underline-offset: 2px; }
   .req { color: #29c2ec; }
 
   .field { margin: 0 0 12px; }
@@ -72,7 +79,7 @@
   .rt-bar:has(button:nth-of-type(2):hover) .rt-slide { transform: translateX(100%); opacity: 1; }
   .rt-bar:has(button:nth-of-type(3):hover) .rt-slide { transform: translateX(200%); opacity: 1; }
   .rt-bar:has(button:nth-of-type(4):hover) .rt-slide { transform: translateX(300%); opacity: 1; }
-  .rt-area { min-height: 96px; padding: 8px; outline: none; }
+  .rt-area { min-height: 96px; padding: 8px; outline: none; background: #fff; color: #111; }
   .rt-area mark, .rt-area [style*="background"] { background: #fff14d; }
 
   .submit {
@@ -98,10 +105,6 @@
     <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
 
     <div class="blk">
-      <h1>Request Protocol</h1>
-      <div class="rule">-----&gt;</div>
-
-      <div class="intake">Porting / commission intake</div>
       <table class="meta">
         <tr><td>FORM NO.</td><td id="form-no">PT-—</td></tr>
         <tr><td>DATE</td><td id="form-date">————</td></tr>
@@ -110,24 +113,24 @@
     </div>
 
     <div class="blk">
-      <div class="sec">Contact</div>
-      <div class="field"><label class="k">Name:</label><input type="text" name="name" required> <span class="req">*</span></div>
-      <div class="field"><label class="k">Email:</label><input type="email" name="email" required> <span class="req">*</span></div>
+      <div class="sec">contact</div>
+      <div class="field"><label class="k">name</label><input type="text" name="name" required> <span class="req">*</span></div>
+      <div class="field"><label class="k">email</label><input type="email" name="email" required> <span class="req">*</span></div>
     </div>
 
     <div class="blk">
-      <p>Initialize a
+      <p>INITIALIZE A
         <select id="type" name="commission_type">
           <option value="Web Build">web build</option>
           <option value="PCB &amp; Hardware">pcb &amp; hardware</option>
           <option value="Strategy &amp; Direction">strategy &amp; direction</option>
           <option value="Systems Engineering">systems engineering</option>
           <option value="General Inquiry">general inquiry</option>
-        </select> request.</p>
+        </select> REQUEST</p>
     </div>
 
     <div class="blk">
-      <div class="sec">Specification <span class="req">*</span></div>
+      <div class="sec">specification <span class="req">*</span></div>
       <div class="rt">
         <div class="rt-bar">
           <button type="button" data-cmd="bold" title="Bold"><b>bold</b></button>
@@ -139,14 +142,14 @@
         <div class="rt-area" id="rt-area" contenteditable="true" role="textbox" aria-multiline="true"></div>
       </div>
       <input type="hidden" name="description" id="description-field">
-      <div class="field" style="margin-top:28px"><label class="k">Refs:</label><input type="text" name="references" class="wide"></div>
-      <div class="field"><label class="k">Files:</label><input type="file" name="attachment" multiple></div>
+      <div class="field" style="margin-top:28px"><label class="k">reference(s)</label><input type="text" name="references" class="wide"></div>
+      <div class="field"><label class="k">files</label><input type="file" name="attachment" multiple></div>
     </div>
 
     <div class="blk">
-      <div class="sec">Terms</div>
-      <div class="field"><label class="k">Budget:</label><input type="text" name="budget"></div>
-      <div class="field"><label class="k">Deadline:</label><input type="text" name="deadline"></div>
+      <div class="sec">terms</div>
+      <div class="field"><label class="k">budget</label><input type="text" name="budget"></div>
+      <div class="field"><label class="k">deadline</label><input type="text" name="deadline"></div>
     </div>
 
     <button class="submit" type="submit">[ Submit Request ]</button>
@@ -157,6 +160,11 @@
     <p>A reply is en route to your email. Reference this number when corresponding.</p>
     <p><a href="../index.html">&lt; back to index</a></p>
   </div>
+</div>
+
+<div class="masthead">
+  <img class="logo" src="../logo.png" alt="phonetucked">
+  <h1>PORTING &gt; COMMISSION INTAKE</h1>
 </div>
 
 <script>
