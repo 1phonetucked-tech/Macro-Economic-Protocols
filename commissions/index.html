@@ -37,6 +37,8 @@
   /* meta grid */
   table.meta { border-collapse: collapse; margin: 0 0 8px; }
   table.meta td { border: 1px solid #29c2ec; padding: 3px 12px; text-transform: lowercase; }
+  /* FORM NO. suffix placeholder before a number is assigned (on submit) */
+  .pending { color: #7d8a8e; }
 
   .sec { margin: 0 0 12px; font-weight: 400; text-decoration: underline; text-decoration-color: #29c2ec; text-underline-offset: 2px; }
   .req { color: #29c2ec; }
@@ -126,7 +128,7 @@
 
     <div class="blk">
       <table class="meta">
-        <tr><td>FORM NO.</td><td id="form-no">PT-—</td></tr>
+        <tr><td>FORM NO.</td><td id="form-no">PT-<span class="pending">XXXXXXXX-XXXX</span></td></tr>
         <tr><td>DATE</td><td id="form-date">————</td></tr>
         <tr><td>PAGE</td><td>1 of 1</td></tr>
       </table>
@@ -163,7 +165,6 @@
       </div>
       <input type="hidden" name="description" id="description-field">
       <div class="field" style="margin-top:28px"><label class="k">reference(s)</label><input type="text" name="references" class="wide"></div>
-      <div class="field"><label class="k">files</label><input type="file" name="attachment" multiple></div>
     </div>
 
     <div class="blk">
@@ -196,6 +197,8 @@
   var d = new Date();
   var iso = d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
   document.getElementById('form-date').textContent = iso;
+  // show the real date prefix with an XXXX suffix until a number is claimed on submit
+  document.getElementById('form-no').innerHTML = 'PT-' + iso.replace(/-/g, '') + '-<span class="pending">XXXX</span>';
 
   function fallbackRef() {
     var ymd = iso.replace(/-/g, '');
