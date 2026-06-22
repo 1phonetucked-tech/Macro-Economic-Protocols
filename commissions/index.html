@@ -93,6 +93,14 @@
   .confirm { display: none; }
   body.sent form#request-form { display: none; }
   body.sent .confirm { display: block; }
+
+  /* small screens: drop the masthead into normal flow so it can't overlap the form */
+  @media (max-width: 700px) {
+    .masthead { position: static; right: auto; bottom: auto; margin: 70px 0 0; }
+    .masthead .logo { width: 120px; }
+    .masthead h1 { font-size: 15px; }
+    #request-form { margin-top: 40px; }
+  }
 </style>
 </head>
 <body>
