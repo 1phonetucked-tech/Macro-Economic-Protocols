@@ -206,6 +206,13 @@ body.home header.home-title h1 {
     text-shadow: none;
     pointer-events: auto;
 }
+/* stack the legend directly under the title, matched to its width */
+body.home header.home-title .title-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    pointer-events: auto;
+}
 #chart .grid line {
     stroke: rgba(255, 255, 255, 0.30);
     stroke-width: 0.6;
@@ -278,7 +285,11 @@ body.home .home-stack {
 /* Legend box (HTML overlay carrying the publish/update dates) */
 body.home .home-legend {
     display: flex;
+    justify-content: space-between;
     gap: 18px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 10px;
     border: 1px solid #ffffff;
     padding: 6px 12px;
     background: rgba(0, 0, 0, 0.65);
