@@ -136,7 +136,6 @@ footer {
     max-height: 80%;
     height: auto;
     width: auto;
-    border-radius: 10px;
 }
 #js-viewer span {
     margin-top: 10px;
@@ -153,7 +152,7 @@ footer {
     cursor: pointer;
 }
 #js-viewer span button:hover {
-    text-decoration: underline;
+    opacity: 0.6;
 }
 .contact-sheet img {
     width: 250px;
