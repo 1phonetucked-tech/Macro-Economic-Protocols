@@ -11,12 +11,15 @@
 <link href="../gallery.css?v=71" rel="stylesheet" type="text/css" media="all">
 <style>
   /* Soldering Log: timestamped sessions plotted as a staggered progress line.
-     Each .entry is positioned on the graph with left/top %. New entries go
-     higher + further right (more progress); connect them with a <line> in the
-     SVG .series group so the line staggers upward over time. */
+     Each .entry is positioned on the graph with CSS vars: --x/--y (desktop %)
+     and optional --mx/--my (mobile %, <=800px; falls back to --x/--y). New
+     entries go higher + further right (more progress); connect them with a
+     <line> in the SVG .series group so the line staggers upward over time. */
   #log { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
   #log .entry {
     position: absolute;
+    left: var(--x);
+    top: var(--y);
     transform: translate(-50%, -50%);
     pointer-events: auto;
     text-align: center;
@@ -30,20 +33,20 @@
     border: 1px solid #ffffff;
     background: #000000;
     cursor: pointer;
-    transition: transform .2s cubic-bezier(.34, 1.56, .64, 1), box-shadow .2s ease;
+    transition: transform .2s cubic-bezier(.34, 1.56, .64, 1);
   }
   #log .entry:hover { z-index: 5; }
-  #log .shots a:hover img { transform: scale(1.55); box-shadow: 0 0 12px rgba(255, 255, 255, .6); }
+  #log .shots a:hover img { transform: scale(1.55); }
   #log .cap {
     margin-top: 8px;
-    font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-    color: #29c2ec;
+    font-family: "Calibri", "Carlito", "Segoe UI", system-ui, -apple-system, sans-serif;
+    color: #ffffff;
     font-size: 12px;
     line-height: 1.55;
     white-space: nowrap;
   }
-  #log .cap .ts { color: #ffffff; }
   @media (max-width: 800px) {
+    #log .entry { left: var(--mx, var(--x)); top: var(--my, var(--y)); }
     #log .shots img { width: 27vw; }
     #log .cap { font-size: 10px; }
   }
@@ -85,7 +88,7 @@
 </header>
 <section id="log">
   <!-- Entry 1 — bottom-left (start of the progress line). -->
-  <div class="entry" style="left:18%;top:76%">
+  <div class="entry" style="--x:18%;--y:76%;--mx:38%;--my:74%">
     <div class="shots">
       <a href="P1015482.JPG"><img src="P1015482.JPG" alt="RCN-1 board front — 8 resistors & 3 white LEDs placed"></a>
       <a href="P1015490.JPG"><img src="P1015490.JPG" alt="RCN-1 board back — solder joints"></a>
