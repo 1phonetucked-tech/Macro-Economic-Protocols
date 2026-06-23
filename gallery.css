@@ -276,8 +276,8 @@ body.home .home-stack {
     left: 5%;
     z-index: 3;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: flex-end;
     gap: 18px;
 }
 
@@ -506,15 +506,15 @@ body.gallery-graph footer {
 body.gallery-graph .ping {
     position: fixed;
     right: 4%;
-    bottom: 5%;
+    bottom: 13%;
     z-index: 2;
     text-align: right;
 }
 
-/* Homepage: lives inside .home-stack, so it flows directly under the logo
-   (the stack's column gap handles the spacing). */
+/* Homepage: lives inside .home-stack (now a row), so it sits to the right of
+   the logo, bottom-aligned with it. */
 body.home .ping {
-    margin-top: -4px;
+    margin-bottom: 4px;
 }
 
 /* Decorative — drop it on small screens so it never crowds content. */
