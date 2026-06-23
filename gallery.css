@@ -467,19 +467,8 @@ body.gallery-graph #photos figure:hover { z-index: 5; }
 body.gallery-graph #photos figure:hover img {
     transform: scale(1.6) translateY(-4px);
 }
-/* filename caption: always visible under each photo (white Calibri) */
-body.gallery-graph #photos .photo-filename {
-    display: block;
-    position: absolute;
-    left: 50%;
-    top: calc(100% + 4px);
-    transform: translateX(-50%);
-    white-space: nowrap;
-    font-family: "Calibri", "Carlito", "Segoe UI", system-ui, -apple-system, sans-serif;
-    font-size: 9px;
-    color: #ffffff;
-    padding: 1px 4px;
-}
+/* filename caption: hidden (photos sit clean on the line) */
+body.gallery-graph #photos .photo-filename { display: none; }
 
 /* footer: published / updated */
 body.gallery-graph footer {
