@@ -517,7 +517,19 @@ body.home .ping {
     margin-bottom: 14px;
 }
 
-/* Decorative — drop it on small screens so it never crowds content. */
+/* Mobile: keep it, but smaller and trimmed to a single line (latest reply only,
+   no header). On the homepage it drops UNDER the logo instead of to its right. */
 @media (max-width: 600px) {
-    .ping { display: none; }
+    .ping {
+        font-size: 9px;
+    }
+    .ping .ping-h { display: none; }
+    .ping .ping-b div:not(:last-child) { display: none; }
+    body.home .ping {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        margin: 4px 0 0;
+        text-align: left;
+    }
 }
