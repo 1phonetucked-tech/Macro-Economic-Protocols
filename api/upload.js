@@ -4,10 +4,13 @@
 // Loads the ESM @vercel/blob SDK via dynamic import so this stays a CommonJS
 // function alongside next-number.js (no "type":"module" needed).
 //
-// Requires env var BLOB_READ_WRITE_TOKEN — auto-injected when you connect a
-// Vercel Blob store to the project (Storage > Blob > connect). If it's missing
-// or the upload fails, responds non-200 so the client degrades gracefully and
-// the form still submits (just without that image).
+// Auth — set up when you connect a Vercel Blob store to the project
+// (Storage > Blob > connect). Two modes are supported:
+//   - Static token:  BLOB_READ_WRITE_TOKEN  (legacy "connect" flow)
+//   - OIDC:          BLOB_STORE_ID          (current "connect" flow; the SDK
+//                    auto-uses the runtime-injected VERCEL_OIDC_TOKEN)
+// If neither is present (or the upload fails) we respond non-200 so the client
+// degrades gracefully and the form still submits (just without that image).
 
 const MAX_BYTES = 6 * 1024 * 1024; // decoded cap; the client downscales first
 
@@ -17,7 +20,8 @@ module.exports = async function handler(req, res) {
     return;
   }
   const token = process.env.BLOB_READ_WRITE_TOKEN;
-  if (!token) {
+  const storeId = process.env.BLOB_STORE_ID;
+  if (!token && !storeId) {
     res.status(503).json({ error: 'blob not configured' });
     return;
   }
@@ -43,12 +47,11 @@ module.exports = async function handler(req, res) {
     const name = `commission-refs/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
 
     const { put } = await import('@vercel/blob');
-    const blob = await put(name, buffer, {
-      access: 'public',
-      contentType,
-      token,
-      addRandomSuffix: false,
-    });
+    const opts = { access: 'public', contentType, addRandomSuffix: false };
+    // Static-token mode: pass it explicitly. OIDC mode: omit token and let the
+    // SDK fall back to VERCEL_OIDC_TOKEN + BLOB_STORE_ID automatically.
+    if (token) opts.token = token;
+    const blob = await put(name, buffer, opts);
 
     res.setHeader('Cache-Control', 'no-store');
     res.status(200).json({ url: blob.url });
