@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link href="../gallery.css?v=71" rel="stylesheet" type="text/css" media="all">
+<link href="../gallery.css?v=72" rel="stylesheet" type="text/css" media="all">
 <style>
   /* Soldering Log: timestamped sessions plotted as a staggered progress line.
      Each .entry is positioned on the graph with CSS vars: --x/--y (desktop %)
@@ -30,7 +30,6 @@
     display: block;
     width: 10vw; max-width: 150px; min-width: 88px;
     height: auto;
-    border: 1px solid #ffffff;
     background: #000000;
     cursor: pointer;
     transition: transform .2s cubic-bezier(.34, 1.56, .64, 1);
@@ -41,14 +40,14 @@
     margin-top: 8px;
     font-family: "Calibri", "Carlito", "Segoe UI", system-ui, -apple-system, sans-serif;
     color: #ffffff;
-    font-size: 12px;
+    font-size: 10px;
     line-height: 1.55;
     white-space: nowrap;
   }
   @media (max-width: 800px) {
     #log .entry { left: var(--mx, var(--x)); top: var(--my, var(--y)); }
     #log .shots img { width: 27vw; }
-    #log .cap { font-size: 10px; }
+    #log .cap { font-size: 9px; }
   }
 </style>
 </head>
