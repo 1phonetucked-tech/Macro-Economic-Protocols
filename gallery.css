@@ -523,13 +523,24 @@ body.home .ping {
     .ping {
         font-size: 9px;
     }
-    .ping .ping-h { display: none; }
+    /* two lines: the PING header + the latest reply only */
     .ping .ping-b div:not(:last-child) { display: none; }
+
+    /* homepage: centered just under the legend (published/updated box up top) */
     body.home .ping {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        margin: 4px 0 0;
-        text-align: left;
+        position: fixed;
+        top: 76px;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: auto;
+        margin: 0;
+        text-align: center;
+    }
+
+    /* galleries / soldering log: top-right, just under the header title */
+    body.gallery-graph .ping {
+        top: 54px;
+        right: 24px;
+        bottom: auto;
     }
 }
