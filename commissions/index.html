@@ -84,6 +84,25 @@
   .rt-area { min-height: 96px; padding: 8px; outline: none; background: #fff; color: #111; }
   .rt-area mark, .rt-area [style*="background"] { background: #fff14d; }
 
+  /* reference images: paste / drop zone + uploaded thumbnails */
+  .refdrop {
+    width: 480px; max-width: 100%; box-sizing: border-box;
+    border: 1px dashed #29c2ec; background: #0a0a0a; color: #7d8a8e;
+    padding: 14px 12px; min-height: 20px; text-align: center; cursor: text;
+    transition: background .15s ease, color .15s ease;
+  }
+  .refdrop.drag { background: #10242b; color: #ededed; }
+  .refthumbs { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+  .refthumb { position: relative; width: 64px; height: 64px; border: 1px solid #29c2ec; background: #000; }
+  .refthumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .refthumb.up img { opacity: .45; }
+  .refthumb .spin { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #29c2ec; }
+  .refthumb .x {
+    position: absolute; top: -8px; right: -8px; width: 16px; height: 16px; line-height: 14px;
+    text-align: center; background: #000; color: #29c2ec; border: 1px solid #29c2ec;
+    cursor: pointer; font-size: 11px;
+  }
+
   /* submit: borderless text CTA — white words, cyan brackets + cyan blinking caret,
      brackets spread on hover (mirrors the homepage [ REQUEST PROTOCOL _ ] link) */
   .submit {
@@ -164,7 +183,10 @@
         <div class="rt-area" id="rt-area" contenteditable="true" role="textbox" aria-multiline="true"></div>
       </div>
       <input type="hidden" name="description" id="description-field">
-      <div class="field" style="margin-top:28px"><label class="k">reference(s)</label><input type="text" name="references" class="wide"></div>
+      <div class="field" style="margin-top:28px"><label class="k">reference(s)</label><input type="text" name="references" class="wide" placeholder="links — are.na / drive / etc."></div>
+      <div class="field"><label class="k">images</label><div id="ref-drop" class="refdrop" tabindex="0" role="button" aria-label="Paste or drop reference images">paste or drop images here</div></div>
+      <div id="ref-thumbs" class="refthumbs" aria-live="polite"></div>
+      <input type="hidden" name="reference_images" id="ref-images-field">
     </div>
 
     <div class="blk">
@@ -251,11 +273,104 @@
     if (document.activeElement === rtArea) updateActive();
   });
 
+  // reference images: paste / drop -> downscale -> upload to Blob -> attach URL
+  var refDrop = document.getElementById('ref-drop');
+  var refThumbs = document.getElementById('ref-thumbs');
+  var refField = document.getElementById('ref-images-field');
+  var refUrls = [];
+  function refSync() { refField.value = refUrls.join('\n'); }
+
+  function refDownscale(file) {
+    return new Promise(function (resolve, reject) {
+      var img = new Image();
+      var src = URL.createObjectURL(file);
+      img.onload = function () {
+        URL.revokeObjectURL(src);
+        var max = 1600, w = img.width, h = img.height;
+        if (w > max || h > max) {
+          if (w >= h) { h = Math.round(h * max / w); w = max; }
+          else { w = Math.round(w * max / h); h = max; }
+        }
+        var c = document.createElement('canvas');
+        c.width = w; c.height = h;
+        c.getContext('2d').drawImage(img, 0, 0, w, h);
+        resolve(c.toDataURL('image/jpeg', 0.82));
+      };
+      img.onerror = function () { URL.revokeObjectURL(src); reject(new Error('bad image')); };
+      img.src = src;
+    });
+  }
+
+  async function refHandle(file) {
+    if (!file || file.type.indexOf('image/') !== 0) return;
+    var dataUrl;
+    try { dataUrl = await refDownscale(file); } catch (e) { return; }
+    var t = document.createElement('div');
+    t.className = 'refthumb up';
+    t.innerHTML = '<img alt=""><span class="spin">…</span>';
+    t.querySelector('img').src = dataUrl;
+    refThumbs.appendChild(t);
+    try {
+      var resp = await fetch('/api/upload', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ dataUrl: dataUrl })
+      });
+      if (!resp.ok) throw new Error('upload failed');
+      var data = await resp.json();
+      if (!data.url) throw new Error('no url');
+      refUrls.push(data.url); refSync();
+      t.classList.remove('up');
+      var spin = t.querySelector('.spin'); if (spin) spin.remove();
+      var x = document.createElement('span');
+      x.className = 'x'; x.textContent = '×'; x.title = 'remove';
+      x.addEventListener('click', function () {
+        var i = refUrls.indexOf(data.url);
+        if (i > -1) { refUrls.splice(i, 1); refSync(); }
+        t.remove();
+      });
+      t.appendChild(x);
+    } catch (e) {
+      t.remove();
+      alert('Could not upload an image (the reference uploader may not be set up yet). You can still paste a link in the reference(s) field.');
+    }
+  }
+
+  if (refDrop) {
+    // Paste anywhere on the page: route images to references (and keep them from
+    // being embedded into the specification box).
+    document.addEventListener('paste', function (e) {
+      var items = (e.clipboardData || {}).items || [];
+      var imgs = [];
+      for (var i = 0; i < items.length; i++) {
+        if (items[i].kind === 'file' && items[i].type.indexOf('image/') === 0) {
+          var f = items[i].getAsFile(); if (f) imgs.push(f);
+        }
+      }
+      if (imgs.length) { e.preventDefault(); imgs.forEach(refHandle); }
+    });
+    ['dragenter', 'dragover'].forEach(function (ev) {
+      refDrop.addEventListener(ev, function (e) { e.preventDefault(); refDrop.classList.add('drag'); });
+    });
+    ['dragleave', 'dragend'].forEach(function (ev) {
+      refDrop.addEventListener(ev, function () { refDrop.classList.remove('drag'); });
+    });
+    refDrop.addEventListener('drop', function (e) {
+      e.preventDefault(); refDrop.classList.remove('drag');
+      var files = (e.dataTransfer || {}).files || [];
+      for (var i = 0; i < files.length; i++) refHandle(files[i]);
+    });
+  }
+
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
     if (!rtArea.textContent.trim()) {
       alert('Please describe your request in the Specification box.');
       rtArea.focus();
+      return;
+    }
+    if (refThumbs && refThumbs.querySelector('.refthumb.up')) {
+      alert('Reference images are still uploading — give it a second.');
       return;
     }
     document.getElementById('description-field').value = rtArea.innerHTML;
