@@ -529,7 +529,7 @@ body.home .ping {
     /* homepage: centered just under the legend (published/updated box up top) */
     body.home .ping {
         position: fixed;
-        top: 76px;
+        top: 94px;
         left: 50%;
         transform: translateX(-50%);
         bottom: auto;
@@ -539,7 +539,7 @@ body.home .ping {
 
     /* galleries / soldering log: top-right, just under the header title */
     body.gallery-graph .ping {
-        top: 54px;
+        top: 72px;
         right: 24px;
         bottom: auto;
     }
