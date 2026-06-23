@@ -487,3 +487,36 @@ body.gallery-graph footer {
     color: #ffffff;
     white-space: nowrap;
 }
+
+/* Ambient `ping` readout (#pt-ping, injected by gallery.js).
+   Header line cyan, replies muted with the latest one brightened. */
+.ping {
+    font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;
+    font-size: 10px;
+    line-height: 1.55;
+    color: #808080;
+    pointer-events: none;
+    user-select: none;
+    white-space: nowrap;
+}
+.ping .ping-h { color: #29c2ec; }
+.ping .ping-b div:last-child { color: #c8c8c8; }
+
+/* Gallery / soldering-log pages: pinned bottom-left. */
+body.gallery-graph .ping {
+    position: fixed;
+    left: 4%;
+    bottom: 5%;
+    z-index: 2;
+}
+
+/* Homepage: lives inside .home-stack, so it flows directly under the logo
+   (the stack's column gap handles the spacing). */
+body.home .ping {
+    margin-top: -4px;
+}
+
+/* Decorative — drop it on small screens so it never crowds content. */
+@media (max-width: 600px) {
+    .ping { display: none; }
+}
