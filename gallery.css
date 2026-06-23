@@ -502,12 +502,13 @@ body.gallery-graph footer {
 .ping .ping-h { color: #29c2ec; }
 .ping .ping-b div:last-child { color: #c8c8c8; }
 
-/* Gallery / soldering-log pages: pinned bottom-left. */
+/* Gallery / soldering-log pages: pinned bottom-right. */
 body.gallery-graph .ping {
     position: fixed;
-    left: 4%;
+    right: 4%;
     bottom: 5%;
     z-index: 2;
+    text-align: right;
 }
 
 /* Homepage: lives inside .home-stack, so it flows directly under the logo
