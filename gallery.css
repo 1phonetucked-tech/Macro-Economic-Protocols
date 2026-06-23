@@ -514,7 +514,7 @@ body.gallery-graph .ping {
 /* Homepage: lives inside .home-stack (now a row), so it sits to the right of
    the logo, bottom-aligned with it. */
 body.home .ping {
-    margin-bottom: 4px;
+    margin-bottom: 14px;
 }
 
 /* Decorative — drop it on small screens so it never crowds content. */
