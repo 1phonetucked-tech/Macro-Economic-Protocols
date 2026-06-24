@@ -9,218 +9,223 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
+  :root { --line:#1f3a42; --cy:#29c2ec; }
   body {
-    margin: 0;
-    background: #000000;
-    color: #ededed;
+    margin: 0; background: #000; color: #ededed;
     font-family: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-    font-size: 11px;
-    line-height: 1.55;
-    padding: 28px 22px 28px;
-    min-height: 100vh;
-    box-sizing: border-box;
+    font-size: 11px; line-height: 1.55;
   }
-  .wrap { max-width: 760px; }
-  #request-form { margin-top: 56px; }
-  a { color: #1597bb; }
-
-  /* plain top-down flow, generous spacing between blocks */
-  .blk { margin: 0 0 46px; }
-
-  h1 { font-size: 22px; font-weight: 700; margin: 0 0 14px; letter-spacing: 0; }
-
-  /* masthead: logo over the title, pinned to the bottom-right corner */
-  .masthead { position: fixed; right: 24px; bottom: 18px; text-align: right; margin: 0; }
-  .masthead .logo { width: 150px; height: auto; }
-  .masthead h1 { margin: 8px 0 0; }
-
-  /* meta grid */
-  table.meta { border-collapse: collapse; margin: 0 0 8px; }
-  table.meta td { border: 1px solid #29c2ec; padding: 3px 12px; text-transform: lowercase; }
-  /* FORM NO. suffix placeholder before a number is assigned (on submit) */
+  .page { max-width: 680px; margin: 0 auto; padding: 22px 20px 60px; box-sizing: border-box; }
+  a { color: var(--cy); text-decoration: none; }
+  .req { color: var(--cy); }
   .pending { color: #7d8a8e; }
 
-  .sec { margin: 0 0 12px; font-weight: 400; text-transform: uppercase; text-decoration: underline; text-decoration-color: #29c2ec; text-underline-offset: 2px; }
-  .req { color: #29c2ec; }
+  /* top lockup */
+  .top { display: flex; align-items: center; gap: 10px; margin: 0 0 14px; }
+  .top .logo { height: 26px; width: auto; display: block; }
+  .top .wm { letter-spacing: .12em; color: #cfcfcf; text-transform: uppercase; font-size: 10px; }
 
-  .field { margin: 0 0 12px; }
-  .field:last-child { margin-bottom: 0; }
-  label.k { display: inline-block; width: 84px; }
-  input[type=text], input[type=email] {
-    font: inherit; font-size: 10px; border: 1px solid #111; background: #fff; color: #111;
-    padding: 2px 4px; width: 340px; max-width: 100%; box-sizing: border-box;
-  }
-  input.wide { width: 480px; padding-top: 14px; padding-bottom: 14px; }
-  input[type=file] { font: inherit; }
-  input[type=text]:focus, input[type=email]:focus, select:focus { outline: none; border-color: #29c2ec; }
-  select {
-    font: inherit; border: 1px solid #111; border-radius: 0; background: #fff; color: #111;
-    padding: 1px 20px 1px 4px; cursor: pointer;
-    -webkit-appearance: none; -moz-appearance: none; appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23111'/%3E%3C/svg%3E");
-    background-repeat: no-repeat; background-position: right 6px center; background-size: 8px;
-  }
+  /* engineering sheet: white outer box, no crop corners */
+  .sheet { border: 1px solid #ffffff; margin-top: 14px; }
+  /* title: white, no hairline under it */
+  .ttl { padding: 8px 10px; letter-spacing: .16em; text-transform: uppercase; color: #fff; }
 
-  /* rich-text editor */
-  .rt { border: 1px solid #111; max-width: 100%; }
-  .rt-bar { display: flex; position: relative; border-bottom: 1px solid #111; }
-  .rt-bar button {
-    flex: 1; font: inherit; line-height: 1; background: #fff; color: #111;
-    border: none; border-right: 1px solid #ccc; padding: 5px 0; cursor: pointer;
-  }
-  .rt-bar button:last-child { border-right: none; }
-  .rt-bar button:hover { color: #1597bb; }
-  .rt-bar button.on { color: #1597bb; }
-  /* sliding cyan indicator */
-  .rt-slide {
-    position: absolute; bottom: -1px; left: 0; width: 25%; height: 2px;
-    background: #29c2ec; opacity: 0; pointer-events: none;
-    transition: transform .22s cubic-bezier(.4,0,.2,1), opacity .15s ease;
-  }
-  .rt-bar:has(button:nth-of-type(1):hover) .rt-slide { transform: translateX(0%);   opacity: 1; }
-  .rt-bar:has(button:nth-of-type(2):hover) .rt-slide { transform: translateX(100%); opacity: 1; }
-  .rt-bar:has(button:nth-of-type(3):hover) .rt-slide { transform: translateX(200%); opacity: 1; }
-  .rt-bar:has(button:nth-of-type(4):hover) .rt-slide { transform: translateX(300%); opacity: 1; }
-  .rt-area { min-height: 96px; padding: 8px; outline: none; background: #fff; color: #111; }
-  .rt-area mark, .rt-area [style*="background"] { background: #fff14d; }
+  /* numbered cells */
+  .cell { border-top: 1px solid var(--line); padding: 6px 10px 9px; position: relative; }
+  .cell .lb { font-size: 9px; color: #4a4a4a; text-transform: uppercase; letter-spacing: .1em; }
+  .cell .no { position: absolute; top: 6px; right: 10px; font-size: 9px; color: #2c4f59; }
+  .cell input { display: block; width: 100%; box-sizing: border-box; background: transparent;
+    border: 0; color: #fff; font: inherit; padding: 4px 0 0; outline: none; }
+  .cell input::placeholder { color: #3f5a61; }
+  .cell:focus-within { background: #06171c; }
+  .two { display: flex; }
+  .two .cell { flex: 1; }
+  .two .cell + .cell { border-left: 1px solid var(--line); }
 
-  /* reference images: paste / drop zone + uploaded thumbnails */
-  .refdrop {
-    width: 540px; max-width: 100%; box-sizing: border-box;
-    border: 1px dashed #29c2ec; background: #0a0a0a; color: #7d8a8e;
-    padding: 20px 14px; min-height: 36px; text-align: center; cursor: text;
-    transition: background .15s ease, color .15s ease;
-  }
-  .refdrop.drag { background: #10242b; color: #ededed; }
-  .refthumbs { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
-  .refthumb { position: relative; width: 64px; height: 64px; border: 1px solid #29c2ec; background: #000; }
-  .refthumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  /* type select */
+  select { font: inherit; background: transparent; color: #fff; border: 0; padding: 4px 18px 4px 0;
+    outline: none; -webkit-appearance: none; -moz-appearance: none; appearance: none; cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2329c2ec'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 2px center; background-size: 8px; }
+  select option { background: #000; }
+
+  /* rich-text spec editor (dark) */
+  .rt { border: 1px solid var(--line); margin-top: 6px; }
+  .rt-bar { display: flex; border-bottom: 1px solid var(--line); position: relative; }
+  .rt-bar button { flex: 1; font: inherit; line-height: 1; background: #0c0c0c; color: #cfcfcf;
+    border: 0; border-right: 1px solid #16242a; padding: 6px 0; cursor: pointer; }
+  .rt-bar button:last-child { border-right: 0; }
+  .rt-bar button:hover, .rt-bar button.on { color: var(--cy); }
+  .rt-area { min-height: 90px; padding: 8px; color: #eaeaea; background: #060606; outline: none; }
+  .rt-area mark, .rt-area [style*="background"] { background: var(--cy); color: #000; }
+
+  /* reference images: drop tile + uploaded pad tiles */
+  .imgrow { border-top: 1px solid var(--line); padding: 8px 10px 11px; position: relative; }
+  .imgrow .lb { font-size: 9px; color: #4a4a4a; text-transform: uppercase; letter-spacing: .1em; }
+  .imgrow .no { position: absolute; top: 8px; right: 10px; font-size: 9px; color: #2c4f59; }
+  .tray { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; }
+  .refthumb { position: relative; width: 74px; }
+  .refthumb img { width: 74px; height: 74px; object-fit: cover; border: 1px solid var(--cy); display: block; }
   .refthumb.up img { opacity: .45; }
-  .refthumb .spin { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #29c2ec; }
-  .refthumb .x {
-    position: absolute; top: -8px; right: -8px; width: 16px; height: 16px; line-height: 14px;
-    text-align: center; background: #000; color: #29c2ec; border: 1px solid #29c2ec;
-    cursor: pointer; font-size: 11px;
-  }
+  .refthumb .spin { position: absolute; top: 0; left: 0; width: 74px; height: 74px;
+    display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--cy); }
+  .refthumb .x { position: absolute; top: -7px; right: -7px; width: 15px; height: 15px; line-height: 13px;
+    text-align: center; background: #000; color: var(--cy); border: 1px solid var(--cy); font-size: 11px; cursor: pointer; }
+  .refthumb .fn { font-size: 8px; color: #6f8a90; margin-top: 4px; letter-spacing: .04em;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .drop { width: 74px; height: 74px; box-sizing: border-box; border: 1px dashed #1f4a55; color: #5f8f9c;
+    display: flex; align-items: center; justify-content: center; text-align: center; font-size: 9px;
+    line-height: 1.3; padding: 4px; cursor: text; transition: background .15s ease, color .15s ease; }
+  .drop.drag { background: #10242b; color: #ededed; }
 
-  /* submit: borderless text CTA — white words, cyan brackets + cyan blinking caret,
-     brackets spread on hover (mirrors the homepage [ REQUEST PROTOCOL _ ] link) */
-  .submit {
-    font-family: inherit; font-size: 13px; background: transparent; color: #fff;
-    border: none; padding: 0; cursor: pointer; margin-top: 20px;
-    letter-spacing: 0.06em; white-space: nowrap; transition: text-shadow 0.2s ease;
-  }
-  .submit .br { display: inline-block; color: #29c2ec; transition: transform 0.25s ease; }
-  .submit .cur { display: inline-block; width: 0.55em; color: #29c2ec; animation: cblink 1.06s steps(1) infinite; }
+  /* title block: top hairline + clean full-height dividers (direct children only) */
+  .block { display: grid; grid-template-columns: repeat(4,1fr); border-top: 1px solid var(--line); }
+  .block > div { padding: 6px 9px; border-right: 1px solid var(--line); }
+  .block > div:last-child { border-right: 0; }
+  .block .k { font-size: 8px; color: #4a4a4a; text-transform: uppercase; letter-spacing: .1em; }
+  .block .v { color: #fff; margin-top: 3px; }
+
+  /* submit — text CTA, no glow */
+  .submit { font: inherit; font-size: 13px; background: transparent; color: #fff; border: 0; padding: 0;
+    cursor: pointer; margin-top: 18px; letter-spacing: .06em; white-space: nowrap; }
+  .submit .br { display: inline-block; color: var(--cy); transition: transform .25s ease; }
+  .submit .cur { display: inline-block; width: .55em; color: var(--cy); animation: cblink 1.06s steps(1) infinite; }
   @keyframes cblink { 50% { opacity: 0; } }
-  .submit:hover, .submit:focus { text-shadow: 0 0 9px rgba(41,194,236,.45); }
   .submit:hover .l, .submit:focus .l { transform: translateX(-12px); }
   .submit:hover .r, .submit:focus .r { transform: translateX(12px); }
   .submit:disabled { opacity: .5; cursor: default; }
   @media (prefers-reduced-motion: reduce) { .submit .cur { animation: none; } }
 
-  /* confirmation state */
+  /* confirmation (submitted) state */
   .confirm { display: none; }
   body.sent form#request-form { display: none; }
   body.sent .confirm { display: block; }
+  .confirm .body { padding: 18px 16px 26px; text-align: center; }
+  .confirm .body p { margin: 0 0 8px; }
+  .confirm .ref { color: #fff; }
+  .confirm .muted { color: #7d8a8e; }
+  .ack { font-size: 17px; letter-spacing: .06em; color: #fff; margin-bottom: 22px; }
+  .ack .br, .ack .ok { color: var(--cy); }
 
-  /* small screens: tuck the masthead into the top-right, beside the meta box */
-  @media (max-width: 700px) {
-    .masthead {
-      position: absolute; top: 96px; right: 12px; bottom: auto;
-      margin: 0; text-align: right; max-width: 45vw;
-    }
-    .masthead .logo { width: 90px; }
-    .masthead h1 { font-size: 15px; line-height: 1.25; margin: 20px 0 0; }
-    #request-form { margin-top: 40px; }
+  @media (max-width: 560px) {
+    .two { display: block; }
+    .two .cell + .cell { border-left: 0; border-top: 1px solid var(--line); }
+    .block { grid-template-columns: 1fr 1fr; }
+    .block > div:nth-child(2) { border-right: 0; }
   }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <p><a href="../index.html">&lt; back to index</a></p>
+<div class="page">
+
+  <div class="top">
+    <img class="logo" src="../logo.png" alt="phonetucked">
+    <span class="wm">porting &gt; commission intake</span>
+  </div>
+  <p><a href="../">&lt; back to index</a></p>
 
   <form id="request-form" action="https://formspree.io/f/mdavqqkw" method="POST">
     <input type="hidden" name="_subject" value="New request — phonetucked">
     <input type="hidden" name="request_id" id="request-id" value="">
     <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
 
-    <div class="blk">
-      <table class="meta">
-        <tr><td>FORM NO.</td><td id="form-no">PT-<span class="pending">XXXXXXXX-XXXX</span></td></tr>
-        <tr><td>DATE</td><td id="form-date">————</td></tr>
-        <tr><td>PAGE</td><td>1 of 1</td></tr>
-      </table>
-    </div>
+    <div class="sheet">
+      <div class="ttl">commission intake &mdash; drawing no. <span id="form-draw">PT-—</span></div>
 
-    <div class="blk">
-      <div class="sec">contact</div>
-      <div class="field"><label class="k">name</label><input type="text" name="name" required> <span class="req">*</span></div>
-      <div class="field"><label class="k">email</label><input type="email" name="email" required> <span class="req">*</span></div>
-    </div>
+      <div class="two">
+        <div class="cell"><span class="no">01</span><span class="lb">name <span class="req">*</span></span><input type="text" name="name" required></div>
+        <div class="cell"><span class="no">02</span><span class="lb">email <span class="req">*</span></span><input type="email" name="email" required></div>
+      </div>
 
-    <div class="blk">
-      <p>INITIALIZE A
+      <div class="cell"><span class="no">03</span><span class="lb">type of request</span>
         <select id="type" name="commission_type">
           <option value="Web Build">web build</option>
           <option value="PCB &amp; Hardware">pcb &amp; hardware</option>
           <option value="Strategy &amp; Direction">strategy &amp; direction</option>
           <option value="Systems Engineering">systems engineering</option>
           <option value="General Inquiry">general inquiry</option>
-        </select> REQUEST</p>
-    </div>
-
-    <div class="blk">
-      <div class="sec">specification <span class="req">*</span></div>
-      <div class="rt">
-        <div class="rt-bar">
-          <button type="button" data-cmd="bold" title="Bold"><b>bold</b></button>
-          <button type="button" data-cmd="italic" title="Italic"><i>italic</i></button>
-          <button type="button" data-cmd="underline" title="Underline"><u>underline</u></button>
-          <button type="button" data-cmd="hilite" title="Highlight">highlight</button>
-          <span class="rt-slide" aria-hidden="true"></span>
-        </div>
-        <div class="rt-area" id="rt-area" contenteditable="true" role="textbox" aria-multiline="true"></div>
+        </select>
       </div>
-      <input type="hidden" name="description" id="description-field">
-      <div class="field" style="margin-top:28px"><label class="k">reference(s)</label><input type="text" name="references" class="wide"></div>
-      <div class="field"><label class="k">images</label><div id="ref-drop" class="refdrop" tabindex="0" role="button" aria-label="Paste or drop reference images">paste or drop images here</div></div>
-      <div id="ref-thumbs" class="refthumbs" aria-live="polite"></div>
-      <input type="hidden" name="reference_images" id="ref-images-field">
-    </div>
 
-    <div class="blk">
-      <div class="sec">terms</div>
-      <div class="field"><label class="k">budget</label><input type="text" name="budget"></div>
-      <div class="field"><label class="k">deadline</label><input type="text" name="deadline"></div>
+      <div class="cell"><span class="no">04</span><span class="lb">specification <span class="req">*</span></span>
+        <div class="rt">
+          <div class="rt-bar">
+            <button type="button" data-cmd="bold" title="Bold"><b>bold</b></button>
+            <button type="button" data-cmd="italic" title="Italic"><i>italic</i></button>
+            <button type="button" data-cmd="underline" title="Underline"><u>underline</u></button>
+            <button type="button" data-cmd="hilite" title="Highlight">highlight</button>
+          </div>
+          <div class="rt-area" id="rt-area" contenteditable="true" role="textbox" aria-multiline="true"></div>
+        </div>
+        <input type="hidden" name="description" id="description-field">
+      </div>
+
+      <div class="cell"><span class="no">05</span><span class="lb">references (links)</span><input type="text" name="references"></div>
+
+      <div class="imgrow"><span class="no">06</span><span class="lb">reference images &mdash; paste or drop</span>
+        <div id="ref-thumbs" class="tray" aria-live="polite">
+          <div id="ref-drop" class="drop" tabindex="0" role="button" aria-label="Paste or drop reference images">paste or<br>drop</div>
+        </div>
+        <input type="hidden" name="reference_images" id="ref-images-field">
+      </div>
+
+      <div class="two">
+        <div class="cell"><span class="no">07</span><span class="lb">budget</span><input type="text" name="budget"></div>
+        <div class="cell"><span class="no">08</span><span class="lb">deadline</span><input type="text" name="deadline"></div>
+      </div>
+
+      <div class="block">
+        <div><div class="k">form no.</div><div class="v" id="form-no">PT-—</div></div>
+        <div><div class="k">date</div><div class="v" id="form-date">————</div></div>
+        <div><div class="k">type</div><div class="v" id="tb-type">web build</div></div>
+        <div><div class="k">enc.</div><div class="v" id="tb-enc">0 img</div></div>
+      </div>
     </div>
 
     <button class="submit" type="submit" aria-label="submit request"><span class="br l" aria-hidden="true">[</span> SUBMIT REQUEST <span class="cur" aria-hidden="true">_</span> <span class="br r" aria-hidden="true">]</span></button>
   </form>
 
   <div class="confirm">
-    <p>Request <b id="confirm-no">PT-—</b> received.</p>
-    <p>A reply is en route to your email. Reference this number when corresponding.</p>
-    <p><a href="../index.html">&lt; back to index</a></p>
+    <div class="sheet">
+      <div class="ttl">commission intake &mdash; drawing no. <span id="c-draw">PT-—</span></div>
+      <div class="body">
+        <div class="ack"><span class="br" aria-hidden="true">[</span> REQUEST RECEIVED <span class="ok" aria-hidden="true">&#10003;</span> <span class="br" aria-hidden="true">]</span></div>
+        <p>Request <span class="ref" id="confirm-no">PT-—</span> logged.</p>
+        <p>A reply is en route to your email.</p>
+        <p class="muted">Reference this number when corresponding.</p>
+      </div>
+      <div class="block">
+        <div><div class="k">form no.</div><div class="v" id="c-formno">PT-—</div></div>
+        <div><div class="k">date</div><div class="v" id="c-date">————</div></div>
+        <div><div class="k">type</div><div class="v" id="c-type">web build</div></div>
+        <div><div class="k">enc.</div><div class="v" id="c-enc">0 img</div></div>
+      </div>
+    </div>
+    <p style="margin-top:18px"><a href="../">&lt; back to index</a></p>
   </div>
-</div>
 
-<div class="masthead">
-  <img class="logo" src="../logo.png" alt="phonetucked">
-  <h1>PORTING &gt; COMMISSION INTAKE</h1>
 </div>
 
 <script>
 (function () {
   var form = document.getElementById('request-form');
   var pad = function (n) { return n < 1000 ? ('00' + n).slice(-3) : String(n); };
+  var typeSel = document.getElementById('type');
+  function typeText() { return typeSel.options[typeSel.selectedIndex].text; }
 
-  // today's date in the meta block
+  // today's date + form-no placeholder (real number claimed on submit)
   var d = new Date();
   var iso = d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
   document.getElementById('form-date').textContent = iso;
-  // show the real date prefix with an XXXX suffix until a number is claimed on submit
-  document.getElementById('form-no').innerHTML = 'PT-' + iso.replace(/-/g, '') + '-<span class="pending">XXXX</span>';
+  var noHtml = 'PT-' + iso.replace(/-/g, '') + '-<span class="pending">XXXX</span>';
+  document.getElementById('form-no').innerHTML = noHtml;
+  document.getElementById('form-draw').innerHTML = noHtml;
+  document.getElementById('tb-type').textContent = typeText();
+  document.getElementById('tb-enc').textContent = '0 img';
+
+  typeSel.addEventListener('change', function () {
+    document.getElementById('tb-type').textContent = typeText();
+  });
 
   function fallbackRef() {
     var ymd = iso.replace(/-/g, '');
@@ -249,8 +254,8 @@
       var cmd = b.getAttribute('data-cmd');
       try { document.execCommand('styleWithCSS', false, true); } catch (e) {}
       if (cmd === 'hilite') {
-        if (!document.execCommand('hiliteColor', false, '#fff14d')) {
-          document.execCommand('backColor', false, '#fff14d');
+        if (!document.execCommand('hiliteColor', false, '#29c2ec')) {
+          document.execCommand('backColor', false, '#29c2ec');
         }
       } else {
         document.execCommand(cmd, false, null);
@@ -278,7 +283,8 @@
   var refThumbs = document.getElementById('ref-thumbs');
   var refField = document.getElementById('ref-images-field');
   var refUrls = [];
-  function refSync() { refField.value = refUrls.join('\n'); }
+  function updateEnc() { document.getElementById('tb-enc').textContent = refUrls.length + ' img'; }
+  function refSync() { refField.value = refUrls.join('\n'); updateEnc(); }
 
   function refDownscale(file) {
     return new Promise(function (resolve, reject) {
@@ -309,7 +315,10 @@
     t.className = 'refthumb up';
     t.innerHTML = '<img alt=""><span class="spin">…</span>';
     t.querySelector('img').src = dataUrl;
-    refThumbs.appendChild(t);
+    var cap = document.createElement('div');
+    cap.className = 'fn'; cap.textContent = file.name || 'image';
+    refThumbs.insertBefore(t, refDrop);
+    t.appendChild(cap);
     try {
       var resp = await fetch('/api/upload', {
         method: 'POST',
@@ -391,7 +400,13 @@
       });
       if (!resp.ok) throw new Error('submit failed');
       document.getElementById('form-no').textContent = ref;
+      document.getElementById('form-draw').textContent = ref;
       document.getElementById('confirm-no').textContent = ref;
+      document.getElementById('c-draw').textContent = ref;
+      document.getElementById('c-formno').textContent = ref;
+      document.getElementById('c-date').textContent = iso;
+      document.getElementById('c-type').textContent = typeText();
+      document.getElementById('c-enc').textContent = refUrls.length + ' img';
       document.body.classList.add('sent');
       window.scrollTo(0, 0);
     } catch (err) {

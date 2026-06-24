@@ -85,6 +85,21 @@ side, divided by a hairline. Field order:
   `gallery.js` version bump**.
 - Not the fixed REF-01…04 image slots (we chose flexible pad tiles).
 
+## Final decisions (as built, after live preview iteration)
+- **Outer sheet border is white** (`#fff`); inner cell/divider lines stay dark cyan-grey
+  (`#1f3a42`). Field/title-block **header labels are dark grey `#4a4a4a`** ("black you can
+  still see"); values are white.
+- **No crop-mark corners**; **no hairline under the title bar** (title floats). Title bar text
+  is white.
+- **Title block = FORM NO. · DATE · TYPE · ENC.** (PAGE/REV dropped). `TYPE` mirrors the
+  selected request type live; `ENC.` shows the reference-image count (`N img`), live.
+- Title-block dividers via a **direct-child selector** (`.block > div`) so the inner
+  label/value divs don't pick up stray border stubs.
+- **Highlight color is cyan** (`#29c2ec`, black text) — the `hiliteColor` command and the
+  `.rt-area` highlight CSS both use it.
+- **Submitted state** = the sheet stays, with a bracketed **`[ REQUEST RECEIVED ✓ ]`** line
+  (echoes the submit CTA) instead of a stamp; same title block, populated on submit.
+
 ## Verify
 - `phonetucked.dev/commissions/` renders a bordered engineering sheet: crop-mark corners,
   cyan title bar with the drawing no., numbered cells, a bottom title block
