@@ -521,7 +521,7 @@ body.home .ping {
    no header). On the homepage it drops UNDER the logo instead of to its right. */
 @media (max-width: 600px) {
     .ping {
-        font-size: 8px;
+        font-size: 7px;
     }
     /* two lines: the PING header + the latest reply only */
     .ping .ping-b div:not(:last-child) { display: none; }
