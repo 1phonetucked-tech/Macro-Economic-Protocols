@@ -23,16 +23,16 @@
   /* top lockup */
   .top { display: flex; align-items: center; gap: 10px; margin: 0 0 14px; }
   .top .logo { height: 26px; width: auto; display: block; }
-  .top .wm { letter-spacing: .12em; color: #cfcfcf; text-transform: uppercase; font-size: 10px; }
+  .top .wm { letter-spacing: .12em; color: #cfcfcf; text-transform: lowercase; font-size: 10px; }
 
   /* engineering sheet: white outer box, no crop corners */
   .sheet { border: 1px solid #ffffff; margin-top: 14px; }
   /* title: white, no hairline under it */
-  .ttl { padding: 8px 10px; letter-spacing: .16em; text-transform: uppercase; color: #fff; }
+  .ttl { padding: 8px 10px; letter-spacing: .16em; text-transform: lowercase; color: #fff; }
 
   /* numbered cells */
   .cell { border-top: 1px solid var(--line); padding: 6px 10px 9px; position: relative; }
-  .cell .lb { font-size: 9px; color: #4a4a4a; text-transform: uppercase; letter-spacing: .1em; }
+  .cell .lb { font-size: 9px; color: #4a4a4a; text-transform: lowercase; letter-spacing: .1em; }
   .cell .no { position: absolute; top: 6px; right: 10px; font-size: 9px; color: #2c4f59; }
   .cell input { display: block; width: 100%; box-sizing: border-box; background: transparent;
     border: 0; color: #fff; font: inherit; padding: 4px 0 0; outline: none; }
@@ -61,7 +61,7 @@
 
   /* reference images: drop tile + uploaded pad tiles */
   .imgrow { border-top: 1px solid var(--line); padding: 8px 10px 11px; position: relative; }
-  .imgrow .lb { font-size: 9px; color: #4a4a4a; text-transform: uppercase; letter-spacing: .1em; }
+  .imgrow .lb { font-size: 9px; color: #4a4a4a; text-transform: lowercase; letter-spacing: .1em; }
   .imgrow .no { position: absolute; top: 8px; right: 10px; font-size: 9px; color: #2c4f59; }
   .tray { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; }
   .refthumb { position: relative; width: 74px; }
@@ -82,7 +82,7 @@
   .block { display: grid; grid-template-columns: repeat(4,1fr); border-top: 1px solid var(--line); }
   .block > div { padding: 6px 9px; border-right: 1px solid var(--line); }
   .block > div:last-child { border-right: 0; }
-  .block .k { font-size: 8px; color: #4a4a4a; text-transform: uppercase; letter-spacing: .1em; }
+  .block .k { font-size: 8px; color: #4a4a4a; text-transform: lowercase; letter-spacing: .1em; }
   .block .v { color: #fff; margin-top: 3px; }
 
   /* submit — text CTA, no glow */
