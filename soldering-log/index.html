@@ -83,9 +83,10 @@
   <line class="axis" x1="4%" y1="90%" x2="4%" y2="8%" marker-end="url(#axis-arrow)"/>
   <line class="axis" x1="4%" y1="90%" x2="96%" y2="90%" marker-end="url(#axis-arrow)"/>
   <g class="series">
-    <!-- Staggered progress line. Add a segment per new entry, e.g.
-         <line x1="18%" y1="74%" x2="34%" y2="58%"/> -->
-    <line x1="18%" y1="76%" x2="42%" y2="54%"/>
+    <!-- Staggered progress line. Coords are % of the wide --graph-w canvas,
+         so a value of N% lands at N/2 of the first screen (200vw canvas).
+         Add a segment per new entry, e.g. <line x1="9%" y1="74%" x2="17%" y2="58%"/> -->
+    <line x1="9%" y1="76%" x2="21%" y2="54%"/>
   </g>
 </svg>
 <header>
@@ -94,7 +95,7 @@
 </header>
 <section id="log">
   <!-- Entry 1 — bottom-left (start of the progress line). -->
-  <div class="entry" style="--x:18%;--y:76%;--mx:28%;--my:84%">
+  <div class="entry" style="--x:9%;--y:76%;--mx:14%;--my:70%">
     <div class="shots">
       <a href="P1015482.JPG"><img src="P1015482.JPG" alt="RCN-1 board front — 8 resistors & 3 white LEDs placed"></a>
       <a href="P1015490.JPG"><img src="P1015490.JPG" alt="RCN-1 board back — solder joints"></a>
@@ -102,7 +103,7 @@
     <div class="cap"><span class="ts">2026 - 06 - 22 19:17</span><br>(8) RESISTOR &amp; (3) WHITE LED</div>
   </div>
   <!-- Entry 2 — higher + further right (more progress). -->
-  <div class="entry" style="--x:42%;--y:54%;--mx:62%;--my:60%">
+  <div class="entry" style="--x:21%;--y:54%;--mx:31%;--my:46%">
     <div class="shots">
       <a href="P1015501.JPG"><img src="P1015501.JPG" alt="RCN-1 board front — 15 white LEDs, IC, transistors & capacitors placed"></a>
       <a href="P1015506.JPG"><img src="P1015506.JPG" alt="RCN-1 board back — solder joints"></a>
