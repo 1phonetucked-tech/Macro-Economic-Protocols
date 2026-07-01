@@ -537,14 +537,25 @@ body.home .ping {
         text-align: center;
     }
 
-    /* galleries / soldering log: the photo strip climbs bottom-left -> top-right,
-       so pin the readout to the top-LEFT corner (under "back to index") where it
-       stays clear of the top-right photo. */
+    /* galleries (benchmark / protocol-accessories): the photo strip climbs
+       bottom-left -> top-right, so the top-right corner is occupied. Pin the
+       readout to the bottom-RIGHT, which stays empty. */
     body.gallery-graph .ping {
+        top: auto;
+        bottom: 16%;
+        right: 24px;
+        left: auto;
+        text-align: right;
+    }
+
+    /* soldering log: photos sit in the CENTER and the graph scrolls
+       horizontally, so top-right is clear and (being fixed) stays put. Top-left
+       would collide with the cyan y-axis line, so keep this page top-right. */
+    body.gallery-graph.log-graph .ping {
         top: 72px;
-        left: 24px;
-        right: auto;
+        right: 24px;
         bottom: auto;
-        text-align: left;
+        left: auto;
+        text-align: right;
     }
 }
