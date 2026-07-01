@@ -537,10 +537,14 @@ body.home .ping {
         text-align: center;
     }
 
-    /* galleries / soldering log: top-right, just under the header title */
+    /* galleries / soldering log: the photo strip climbs bottom-left -> top-right,
+       so pin the readout to the top-LEFT corner (under "back to index") where it
+       stays clear of the top-right photo. */
     body.gallery-graph .ping {
         top: 72px;
-        right: 24px;
+        left: 24px;
+        right: auto;
         bottom: auto;
+        text-align: left;
     }
 }
