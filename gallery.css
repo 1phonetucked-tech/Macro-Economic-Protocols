@@ -542,7 +542,7 @@ body.home .ping {
        readout to the bottom-RIGHT, which stays empty. */
     body.gallery-graph .ping {
         top: auto;
-        bottom: 16%;
+        bottom: 9%;
         right: 24px;
         left: auto;
         text-align: right;
